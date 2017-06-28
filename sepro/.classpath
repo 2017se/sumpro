@@ -8,5 +8,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
