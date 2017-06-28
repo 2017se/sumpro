@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-28 16:44:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.answers" table="ANSWERS">
+        <id name="o_id" type="int">
+            <column name="O_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="u_id" type="int">
+            <column name="U_ID" />
+        </property>
+        <property name="answer" type="char">
+            <column name="ANSWER" />
+        </property>
+    </class>
+</hibernate-mapping>
