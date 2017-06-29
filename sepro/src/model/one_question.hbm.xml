@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-28 16:44:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.one_question" table="ONE_QUESTION">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="q_id" type="int">
+            <column name="Q_ID" />
+        </property>
+        <property name="title_num" type="int">
+            <column name="TITLE_NUM" />
+        </property>
+        <property name="stem" type="char">
+            <column name="STEM" />
+        </property>
+        <property name="nessecity" type="int">
+            <column name="NESSECITY" />
+        </property>
+        <property name="topicid" type="char">
+            <column name="TOPICID" />
+        </property>
+    </class>
+</hibernate-mapping>
