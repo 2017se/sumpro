@@ -19,39 +19,29 @@ public class AppServiceImpl implements AppService {
 	private questionnairedao questionnairedao;
 	private userdao userdao;
 	
-	//getter和setter，这几个函数有没有用我也不知道
-	public answerdao getAnswerdao() {
-		return answerdao;
-	}
-
+	
+	//setter注入
+	
 	public void setAnswerdao(answerdao answerdao) {
 		this.answerdao = answerdao;
-	}
-
-	public one_questiondao getOne_questiondao() {
-		return one_questiondao;
 	}
 
 	public void setOne_questiondao(one_questiondao one_questiondao) {
 		this.one_questiondao = one_questiondao;
 	}
 
-	public q_optiondao getQ_optiondao() {
-		return q_optiondao;
-	}
-
 	public void setQ_optiondao(q_optiondao q_optiondao) {
 		this.q_optiondao = q_optiondao;
 	}
 
-	public questionnairedao getquestionnairedao() {
-		return questionnairedao;
-	}
-
-	public void setquestionnairedao(questionnairedao questionnairedao) {
+	public void setQuestionnairedao(questionnairedao questionnairedao) {
 		this.questionnairedao = questionnairedao;
 	}
 
+	public void setUserdao(userdao userdao){
+		this.userdao = userdao;
+	}
+	
 	
 	/* 
 	 * 登录 
@@ -61,35 +51,34 @@ public class AppServiceImpl implements AppService {
 	
 	@Override
 	public user login(String username, String password) {
-		// TODO Auto-generated method stub
 		String identity = username;
 		user userTemp;
 		
 		//identify is username
 		if((userTemp = userdao.getUserByUsername(identity)) != null){
 			//identity exists, then check password
-			if(userTemp.getPassword() != password){
-				return null;
+			if(userTemp.getPassword().equals(password)){
+				return userTemp;
 			}
-			return userTemp;
+			return null;
 		}
 
 		//identify is email
 		if((userTemp = userdao.getUserByEmail(identity)) != null){
 			//identity exists, then check password
-			if(userTemp.getPassword() != password){
-				return null;
+			if(userTemp.getPassword().equals(password)){
+				return userTemp;
 			}
-			return userTemp;
+			return null;
 		}
 		
 		//identify is username
 		if((userTemp = userdao.getUserByPhone(identity)) != null){
 			//identity exists, then check password
-			if(userTemp.getPassword() != password){
-				return null;
+			if(userTemp.getPassword().equals(password)){
+				return userTemp;
 			}
-			return userTemp;
+			return null;
 		}
 		return null;
 	}

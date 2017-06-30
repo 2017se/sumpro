@@ -8,6 +8,8 @@
 		        if(u==get_one(id))return true;
 		        return false;
 	        }
+ *      修改hql语句中USER->user[hql语法里面是POJO对象而不是table]
+ *      fix：使用List.get(0)前先检验是否为null
  *********************************************************************************/
 
 package daoimpl;
@@ -26,7 +28,10 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 	@SuppressWarnings("unchecked")
 	public user get_one(int userID) {
 		List<user> u=(List<user>) getHibernateTemplate()
-				.find("from User as u where u.id=?",userID);
+				.find("from user as u where u.id=?",userID);
+		if(u.isEmpty()){
+			return null;
+		}
 		return u.get(0);
 	}
 
@@ -60,7 +65,10 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 	@SuppressWarnings("unchecked")
 	public user getUserByUsername(String username) {
 		List<user> u=(List<user>) getHibernateTemplate()
-				.find("from USER as u where u.username=?",username);
+				.find("from user as u where u.username=?",username);
+		if(u.isEmpty()){
+			return null;
+		}
 		return u.get(0);
 	}
 
@@ -68,7 +76,10 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 	@SuppressWarnings("unchecked")
 	public user getUserByPhone(String phone) {
 		List<user> u=(List<user>) getHibernateTemplate()
-				.find("from USER as u where u.phone=?",phone);
+				.find("from user as u where u.phone=?",phone);
+		if(u.isEmpty()){
+			return null;
+		}
 		return u.get(0);
 	}
 
@@ -76,7 +87,10 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 	@SuppressWarnings("unchecked")
 	public user getUserByEmail(String email) {
 		List<user> u=(List<user>) getHibernateTemplate()
-				.find("from USER as u where u.mail=?",email);
+				.find("from user as u where u.mail=?",email);
+		if(u.isEmpty()){
+			return null;
+		}
 		return u.get(0);
 	}
 

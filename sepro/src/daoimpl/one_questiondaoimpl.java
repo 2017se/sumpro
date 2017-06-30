@@ -1,3 +1,8 @@
+/********************************************************************************* 
+ * 6.30 修改拼写：one_questioimpl.java->one_questionimpl.java
+ *      修改hql语句中ONE_QUESTION->one_question[hql语法里面是POJO对象而不是table]
+ *********************************************************************************/
+
 package daoimpl;
 
 import java.util.List;
@@ -8,13 +13,13 @@ import dao.one_questiondao;
 
 import model.one_question;
 
-public class one_questiodaoimpl extends HibernateDaoSupport implements one_questiondao {
+public class one_questiondaoimpl extends HibernateDaoSupport implements one_questiondao {
 	
 	@Override
 	@SuppressWarnings("unchecked")
 	public one_question geto_q(int q_id) {
 		List<one_question> questions = (List<one_question>)getHibernateTemplate()
-				.find("from ONE_QUESTION as question where question.id=?", q_id);
+				.find("from one_question as question where question.id=?", q_id);
 		return questions.get(0);
 	}
 

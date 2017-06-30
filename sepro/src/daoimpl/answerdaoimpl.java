@@ -1,3 +1,7 @@
+/********************************************************************************* 
+ * 6.30 修改hql语句中ANSWERS->answers[hql语法里面是POJO对象而不是table]
+ *********************************************************************************/
+
 package daoimpl;
 
 import java.util.List;
@@ -14,7 +18,7 @@ public class answerdaoimpl extends HibernateDaoSupport implements answerdao {
 	@SuppressWarnings("unchecked")
 	public answers getan(int o_id, int u_id){
 		List<answers> ans =(List<answers>) getHibernateTemplate()
-				.find("from ANSWERS as ans where ans.o_id=? and ans.u_id=?", o_id, u_id);
+				.find("from answers as ans where ans.o_id=? and ans.u_id=?", o_id, u_id);
 		return ans.get(0);
 	}
 

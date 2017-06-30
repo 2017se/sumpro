@@ -27,7 +27,7 @@
 				<value>model/answers.hbm.xml</value>
 				<value>model/one_question.hbm.xml</value>
 				<value>model/q_options.hbm.xml</value>
-				<value>model/questionier.hbm.xml</value>
+				<value>model/questionnaire.hbm.xml</value>
 				<value>model/user.hbm.xml</value>
 			</list>
 		</property>
@@ -43,30 +43,30 @@
 	</bean>		
 
 	<!-- DAO Bean -->
-	<bean id="answerDao" class="daoimpl.answerdaoimpl">
+	<bean id="answerdao" class="daoimpl.answerdaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="one_questionDao" class="daoimpl.one_questiondaoimpl">
+	<bean id="one_questiondao" class="daoimpl.one_questiondaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="q_optionDao" class="daoimpl.q_optiondaoimpl">
+	<bean id="q_optiondao" class="daoimpl.q_optiondaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="questionierDao" class="daoimpl.questionierdaoimpl">
+	<bean id="questionnairedao" class="daoimpl.questionnairedaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="userDao" class="daoimpl.userdaoimpl">
+	<bean id="userdao" class="daoimpl.userdaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 	<!-- Service -->
 	<bean id="appService" class="service.impl.AppServiceImpl">
 		<!-- DAO -->
-		<property name="answerDao" ref="answerDao"></property>
-		<property name="one_questionDao" ref="one_questionDao"></property>
-		<property name="q_optionDao" ref="q_optionDao"></property>
-		<property name="questionierDao" ref="questionierDao"></property>
-		<property name="userDao" ref="userDao"></property>
+		<property name="answerdao" ref="answerdao"></property>
+		<property name="one_questiondao" ref="one_questiondao"></property>
+		<property name="q_optiondao" ref="q_optiondao"></property>
+		<property name="questionnairedao" ref="questionnairedao"></property>
+		<property name="userdao" ref="userdao"></property>
 	</bean>
 	
 	<!-- HibernateTransactionManager -->
