@@ -23,7 +23,7 @@ public class one_questiodaoimpl extends HibernateDaoSupport implements one_quest
 		one_question question = geto_q(q_id);
 		if(question != null){ //object exists
 			getHibernateTemplate().delete(question);
-			if(geto_q(q_id)==null)
+			if(geto_q(q_id) == null)
 				return true;
 		}
 		return false;

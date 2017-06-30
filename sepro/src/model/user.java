@@ -1,62 +1,75 @@
+/******************************************************************
+ * 6.30 修改char->String, 拼写wassward->password
+ *      修改name和mail的类型int->String
+ *****************************************************************/
+
 package model;
 
 public class user {
+	
 		private int id;
-		private char wassward;
-		private char username;
-		private int name;
-		private int mail;
-		private char qq;
-		private char phone;
+		private String password;
+		private String username;
+		private String name;
+		private String mail;
+		private String qq;
+		private String phone;
 		private int role;
+		
 		public int getId() {
 			return id;
 		}
 		public void setId(int id) {
 			this.id = id;
 		}
-		public char getWassward() {
-			return wassward;
+		
+		public String getPassword() {
+			return password;
 		}
-		public void setWassward(char wassward) {
-			this.wassward = wassward;
+		public void setPassword(String password) {
+			this.password = password;
 		}
-		public char getUsername() {
+		
+		public String getUsername() {
 			return username;
 		}
-		public void setUsername(char username) {
+		public void setUsername(String username) {
 			this.username = username;
 		}
-		public int getName() {
+		
+		public String getName() {
 			return name;
 		}
-		public void setName(int name) {
+		public void setName(String name) {
 			this.name = name;
 		}
-		public int getMail() {
+		
+		public String getMail() {
 			return mail;
 		}
-		public void setMail(int mail) {
+		public void setMail(String mail) {
 			this.mail = mail;
 		}
-		public char getQq() {
+		
+		public String getQq() {
 			return qq;
 		}
-		public void setQq(char qq) {
+		public void setQq(String qq) {
 			this.qq = qq;
 		}
-		public char getPhone() {
+		
+		public String getPhone() {
 			return phone;
 		}
-		public void setPhone(char phone) {
+		public void setPhone(String phone) {
 			this.phone = phone;
 		}
+		
 		public int getRole() {
 			return role;
 		}
 		public void setRole(int role) {
 			this.role = role;
-		}
-		
+		}	
 		
 }

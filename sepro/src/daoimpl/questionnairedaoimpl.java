@@ -1,23 +1,23 @@
 package daoimpl;
 
-import dao.questionierdao;
-import model.questionier;
-import model.user;
-
+import dao.questionnairedao;
+import model.questionnaire;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class questionierdaoimpl extends HibernateDaoSupport implements questionierdao {
+public class questionnairedaoimpl extends HibernateDaoSupport implements questionnairedao {
 
 	@Override
-	public questionier getq(int id) {
-		List<questionier> u=(List<questionier>) getHibernateTemplate().find("from questionier as qu where qu.id=?",id);
+	@SuppressWarnings("unchecked")
+	public questionnaire getq(int id) {
+		List<questionnaire> u=(List<questionnaire>) getHibernateTemplate()
+				.find("from questionnaire as qu where qu.id=?",id);
 		return u.get(0);
 	}
 
 	@Override
-	public boolean setq(questionier q) {
+	public boolean setq(questionnaire q) {
 		 int id=q.getId();
 		 getHibernateTemplate().merge(q);
 		 if(q==getq(id))return true;
@@ -25,17 +25,17 @@ public class questionierdaoimpl extends HibernateDaoSupport implements questioni
 	}
 
 	@Override
-	public boolean updateq(questionier q) {
+	public boolean updateq(questionnaire q) {
 		int id=q.getId();
 		getHibernateTemplate().merge(q);
-		questionier q_new=getq(id);
+		questionnaire q_new=getq(id);
 		if(q==q_new)return true;
 		return false;
 	}
 
 	@Override
 	public boolean deleteq(int id) {
-		questionier qu=getq(id);//找到删除目标
+		questionnaire qu=getq(id);//找到删除目标
 		if(qu!=null){
 		getHibernateTemplate().delete(qu);
 		if(getq(id)==null)return true;

@@ -12,5 +12,22 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-orm-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-context-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-tx-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/mysql-connector-java-5.1.41-bin.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-aop-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-beans-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-core-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-dao-2.0.8.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-jdbc-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-web-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-webmvc-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-hibernate-1.2.9.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/hibernate-core-5.2.10.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

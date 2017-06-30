@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-28 16:44:38 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-30 14:31:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="model.questionier" table="QUESTIONIER">
+    <class name="model.questionnaire" table="QUESTIONNAIRE">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
@@ -11,11 +11,17 @@
         <property name="u_id" type="int">
             <column name="U_ID" />
         </property>
-        <property name="title" type="char">
+        <property name="title" type="java.lang.String">
             <column name="TITLE" />
         </property>
-        <property name="instruction" type="char">
+        <property name="instruction" type="java.lang.String">
             <column name="INSTRUCTION" />
+        </property>
+        <property name="set_time" type="java.sql.Time">
+            <column name="SET_TIME" />
+        </property>
+        <property name="end_time" type="java.sql.Time">
+            <column name="END_TIME" />
         </property>
     </class>
 </hibernate-mapping>

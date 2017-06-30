@@ -16,7 +16,7 @@
         <mapping resource="modle/answer.hbm.xml"/>
         <mapping resource="modle/one_question.hbm.xml"/>
         <mapping resource="modle/q_options.hbm.xml"/>
-        <mapping resource="modle/questionier.hbm.xml"/>
+        <mapping resource="modle/questionnaire.hbm.xml"/>
         <mapping resource="modle/user.hbm.xml"/>
         
         

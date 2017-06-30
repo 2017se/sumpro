@@ -3,16 +3,10 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-6-30 14:31:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="model.answers" table="ANSWERS">
-        <id name="o_id" type="int">
-            <column name="O_ID" />
+    <class name="action.BaseAction" table="BASEACTION">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="u_id" type="int">
-            <column name="U_ID" />
-        </property>
-        <property name="answer" type="java.lang.String">
-            <column name="ANSWER" />
-        </property>
     </class>
 </hibernate-mapping>

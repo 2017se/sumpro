@@ -1,46 +1,59 @@
+/******************************************************************
+ * 6.30 修改char->String
+ *      根据数据库设计重写
+ *****************************************************************/
+
 package model;
 
 public class one_question {
-	private int questionID;
-	private char Title;
-	private char direction;
-	private char must_an;
-	private int paperid;
-	private char topicid;
-	public int getQuestionID() {
-		return questionID;
+	
+	private int id;
+	private int q_id;
+	private int title_num;
+	private String stem;
+	private int type;
+	private int nessecity;
+	
+	public int getId() {
+		return id;
 	}
-	public void setQuestionID(int questionID) {
-		this.questionID = questionID;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public char getTitle() {
-		return Title;
+	
+	public int getQ_id() {
+		return q_id;
 	}
-	public void setTitle(char title) {
-		Title = title;
+	public void setQ_id(int q_id) {
+		this.q_id = q_id;
 	}
-	public char getDirection() {
-		return direction;
+	
+	public int getTitle_num() {
+		return title_num;
 	}
-	public void setDirection(char direction) {
-		this.direction = direction;
+	public void setTitle_num(int title_num) {
+		this.title_num = title_num;
 	}
-	public char getMust_an() {
-		return must_an;
+	
+	public String getStem() {
+		return stem;
 	}
-	public void setMust_an(char must_an) {
-		this.must_an = must_an;
+	public void setStem(String stem) {
+		this.stem = stem;
 	}
-	public int getPaperid() {
-		return paperid;
+	
+	public int getType() {
+		return type;
 	}
-	public void setPaperid(int paperid) {
-		this.paperid = paperid;
+	public void setType(int type) {
+		this.type = type;
 	}
-	public char getTopicid() {
-		return topicid;
+	
+	public int getNessecity() {
+		return nessecity;
 	}
-	public void setTopicid(char topicid) {
-		this.topicid = topicid;
+	public void setNessecity(int nessecity) {
+		this.nessecity = nessecity;
 	}
+
 }

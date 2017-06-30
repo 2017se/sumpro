@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-28 16:44:38 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-30 14:37:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.answer_questionnaire" table="ANSWER_QUESTIONNAIRE">
         <id name="q_id" type="int">
@@ -11,7 +11,7 @@
         <property name="u_id" type="int">
             <column name="U_ID" />
         </property>
-        <property name="submit_time" type="java.sql.Date">
+        <property name="submit_time" type="java.sql.Time">
             <column name="SUBMIT_TIME" />
         </property>
         <property name="if_complete" type="int">

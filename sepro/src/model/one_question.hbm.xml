@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-28 16:44:38 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-30 14:31:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.one_question" table="ONE_QUESTION">
         <id name="id" type="int">
@@ -14,14 +14,14 @@
         <property name="title_num" type="int">
             <column name="TITLE_NUM" />
         </property>
-        <property name="stem" type="char">
+        <property name="stem" type="java.lang.String">
             <column name="STEM" />
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" />
         </property>
         <property name="nessecity" type="int">
             <column name="NESSECITY" />
-        </property>
-        <property name="topicid" type="char">
-            <column name="TOPICID" />
         </property>
     </class>
 </hibernate-mapping>
