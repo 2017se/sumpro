@@ -129,10 +129,10 @@ public class AppServiceImpl implements AppService {
 		}
 		
 		//保存user，以下内容注册时不填写，登录后可以修改
-		user.setMail(null);
-		user.setName(null);
-		user.setQq(null);
-		user.setRole(0); // 0是普通用户
+		//user.setMail(null);
+		//user.setName(null);
+		//user.setQq(null);
+		//user.setRole(0); // 0是普通用户
 		if(userdao.createuser(user)){
 			return 1;
 		}
