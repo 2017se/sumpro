@@ -41,8 +41,8 @@ public class RegisterAction extends BaseAction{
 		userTemp.setName(name);
 		userTemp.setUsername(username);
 		userTemp.setPassword(password);
-		userTemp.setMail(mail);
 		userTemp.setPhone(phone);
+		userTemp.setMail(mail);
 		userTemp.setQq(qq);
 		userTemp.setRole(role);
 		
