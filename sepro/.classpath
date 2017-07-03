@@ -2,12 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts"/>
@@ -18,7 +12,6 @@
 	<classpathentry kind="lib" path="D:/lenovo/web/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/cglib-nodep-2.1_3.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/lenovo/web/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/mysql-connector-java-5.1.41-bin.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/spring-aop-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/spring-beans-3.0.5.RELEASE.jar"/>
@@ -29,5 +22,47 @@
 	<classpathentry kind="lib" path="D:/lenovo/web/spring-webmvc-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/spring-hibernate-1.2.9.jar"/>
 	<classpathentry kind="lib" path="D:/lenovo/web/hibernate-core-5.2.10.Final.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/struts2-core-2.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/hibernate-3.2.6.ga.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/org.springframework.asm_3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/spring-expression-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/c3p0-0.9.5.2.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/aspectjweaver-1.8.10.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/mchange-commons-java-0.2.11.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/jta-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="#system#;jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_77">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/backport-util-concurrent-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/freemarker-2.3.16.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/hibernate-commons-annotations-4.0.2.Final.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/javassist-3.7.1.GA.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/jcl-over-slf4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/jul-to-slf4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/mchange-commons-java-0.2.7.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/ognl-3.0.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/spring-instrument-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/struts2-spring-plugin-2.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/xml-apis-1.0.b2.jar"/>
+	<classpathentry kind="lib" path="D:/lenovo/web/final/xwork-core-2.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

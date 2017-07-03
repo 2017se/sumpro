@@ -1,9 +1,16 @@
 /******************************************************************
  * 6.30 修改char->String
  *      根据数据库设计重写
+ * 7.3  增加成员 List<q_options> Options, 表示一个question对应的所有
+ *      选项
  *****************************************************************/
 
 package model;
+
+import model.q_options;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class one_question {
 	
@@ -54,6 +61,17 @@ public class one_question {
 	}
 	public void setNessecity(int nessecity) {
 		this.nessecity = nessecity;
+	}
+
+	
+	private List<q_options> options = new ArrayList<q_options>();
+	
+	public List<q_options> getOptions() {
+		return options;
+	}
+	
+	public void setOptions(List<q_options> options) {
+		this.options = options;
 	}
 
 }

@@ -1,6 +1,13 @@
+/********************************************************************************
+ * 7.3 定义创建修改删除问卷、修改用户信息需要的service层接口（未实现）
+ *******************************************************************************/
+
 package service.impl;
 
+import model.questionnaire;
 import model.user;
+
+import java.util.List;
 
 import dao.answerdao;
 import dao.one_questiondao;
@@ -138,6 +145,54 @@ public class AppServiceImpl implements AppService {
 		}
 		
 		return 0;
+	}
+
+	@Override
+	public List<questionnaire> getQuesListCreated(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public questionnaire getQuesContent(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int saveQuesContent(questionnaire ques) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateQuesContent(questionnaire ques) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteQuesContent(questionnaire ques) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public user getUserInfo(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateUserInfo(user user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<questionnaire> getQuesListFilled(int userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

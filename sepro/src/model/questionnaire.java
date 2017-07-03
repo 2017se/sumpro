@@ -2,11 +2,17 @@
  * 6.30 修改char->String
  *      修改拼写questionier->questionnaire，更改所有引用
  *      添加变量set_time，end_time：根据数据库设计修改
+ * 7.3  增加成员 List<one_question>questions, 表示一个questionnaire对
+ *      应的所有question
  *****************************************************************/
 
 package model;
 
 import java.sql.Time;
+import java.util.List;
+import java.util.ArrayList;
+
+import model.one_question;
 
 public class questionnaire {
 	
@@ -59,4 +65,15 @@ public class questionnaire {
 			this.end_time = end_time;
 		}
 		
+		/*questions: questions of a questionnaire*/
+		private List<one_question> questions = new ArrayList<one_question>();
+		
+		public List<one_question> getQuestions() {
+			return questions;
+		}
+		
+		public void setQuestions(List<one_question> questions) {
+			this.questions = questions;
+		}
+
 }
