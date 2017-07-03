@@ -33,8 +33,8 @@
 									}
 								%>
 	
-							<div class="modal-footer">
-								<input type="submit" class="btn btn-primary" value="login"/>
+							<div >
+								<input type="submit"  value="login"/>
 							</div>
 							
 						</div>

@@ -11,8 +11,13 @@
 	
 	<!-- login -->
 	<action name="Login" class="action.LoginAction">
-		<result name="success">succ.jsp</result>
-		<result name="none">fail.jsp</result>
+		<result name="success">/succ.jsp</result>
+		<result name="none">/fail.jsp</result>
+	</action>
+	
+	<action name="Register" class="action.RegisterAction">
+		<result name="success">/succ.jsp</result>
+		<result name="none">/fail.jsp</result>
 	</action>
 	
 	</package>

@@ -1,8 +1,7 @@
 package action;
 
-import javax.servlet.http.Cookie;
-
 import model.user;
+
 import service.AppService;
 
 public class LoginAction extends BaseAction {
@@ -36,8 +35,7 @@ public class LoginAction extends BaseAction {
 		this.getIdentify();
 		this.getPassword();
 		user user = appService.login(identity, password);
-		System.out.println(user.getName());
-		if((user ) != null){
+		if((user) != null){
 			return SUCCESS;
 		}
 		return NONE;
