@@ -8,9 +8,11 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/dataTables.bootstrap.min.js"></script>
+	<script src="../js/bookstore.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="../js/signup.js"></script>
+
 <style>
 nec{color:red}
 
@@ -111,16 +113,13 @@ reg_button_location{
 <body>
 <div class="logo_img"><img src="../picture/logo.jpg" width="80px" height="80px" /></div>
 <div class="title">问卷网</div>
-<text_location>
-	<A HREF='#'>问卷广场</A>
-	<A HREF='#'>模板库</A>
-	<A HREF='#'>关于我们</A>
-</text_location>
+<text_location><A HREF='#'>问卷广场</A>
+<A HREF='#'>模板库</A>
+<A HREF='#'>关于我们</A></text_location>
 
 <log_button_location><button class="button white bigrounded" data-toggle="modal" data-target="#login">登录</button></log_button_location>
 <reg_button_location><button class="button white bigrounded" data-toggle="modal" data-target="#regis" >注册</button></reg_button_location>
 
-<form action="Login">
 <div class="modal fade" id="login" tabindex="-1" role="dialog"  aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -135,29 +134,27 @@ reg_button_location{
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-12">
+							<form role="form" method=post action="login">
 								<div class="form-group">
-									<label>用户名/邮箱/手机号</label><nec><label>*</label></nec> <input class="form-control" name="identity">
+									<label>用户名</label><nec><label>*</label></nec> <input class="form-control" name="username">
 								</div>
 								<div class="form-group">
 									<label>密码</label><nec><label>*</label></nec> <input class="form-control" type="password" name="password">
 								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			<div class="modal-footer">
-				
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<INPUT TYPE="submit" Value="登录" class="btn btn-default">
-			
+				<INPUT TYPE=SUBMIT Value="登录" class="btn btn-default">
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-	</form>
 
 
-<form action="Register">
 <div class="modal fade" id="regis" tabindex="-1" role="dialog"  aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -172,17 +169,22 @@ reg_button_location{
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-12">
+							<form role="form" method=post Action="regis">
 								<div class="form-group">
-									<label>用户名</label><nec><label>*</label></nec> <input class="form-control" name="username">
+									<label>用户名</label><nec><label>*</label></nec> <input class="form-control" id="txtUserName" name="username" onblur="blurName(this.value)">
+									<nec><span id="checkName"></span></nec>
 								</div>
 								<div class="form-group">
-									<label>密码</label><nec><label>*</label></nec> <input class="form-control" type="password" name="password">
+									<label>密码</label><nec><label>*</label></nec> <input class="form-control" id="txtPassword" type="password" onblur="blurPwd(this.value)" name="password">
+									<nec><span id="checkPwd"></span></nec>
 								</div>
 								<div class="form-group">
-									<label>再次输入密码</label><nec><label>*</label></nec> <input class="form-control" type="password submit" name="password_c">
+									<label>再次输入密码</label><nec><label>*</label></nec> <input class="form-control" id="pwdOk" type="password" name="password_c"  onblur="blurPwdOk(this.value)">
+									<nec><span id="checkOk"></span></nec>
 								</div>
 								<div class="form-group">
-									<label>邮箱</label> <nec><label>*</label></nec> <input class="form-control" type="mail" name="mail">
+									<label>邮箱</label> <nec><label>*</label></nec> <input class="form-control" id="check_mail" type="email" name="email" onblur="bluremail(this.value)">
+									<nec><span id="checkmail"></span></nec>
 								</div>
 								<div class="form-group">
 									<label>姓名</label> <input class="form-control"
@@ -196,19 +198,18 @@ reg_button_location{
 									<label>phone</label> <input class="form-control" 
 										name="phone">
 								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<INPUT TYPE=SUBMIT Value="注册" class="btn btn-default">
+				<INPUT TYPE=SUBMIT Value="注册" class="btn btn-default" >
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-</form>
-
 
 	
 
