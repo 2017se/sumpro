@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-27 15:11:08 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.role" table="ROLE">
+        <id name="roleID" type="int">
+            <column name="ROLEID" />
+            <generator class="assigned" />
+        </id>
+        <property name="roleName" type="char">
+            <column name="ROLENAME" />
+        </property>
+    </class>
+</hibernate-mapping>

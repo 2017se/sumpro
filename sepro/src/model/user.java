@@ -1,40 +1,75 @@
+/******************************************************************
+ * 6.30 修改char->String, 拼写wassward->password
+ *      修改name和mail的类型int->String
+ *****************************************************************/
+
 package model;
 
 public class user {
-		private int userID;
-		private char PassWard;
-		private char userName;
-		private int roleID;
-		private int land;
-		public int getUserID() {
-			return userID;
+	
+		private int id;
+		private String password;
+		private String username;
+		private String name;
+		private String mail;
+		private String qq;
+		private String phone;
+		private int role;
+		
+		public int getId() {
+			return id;
 		}
-		public void setUserID(int userID) {
-			this.userID = userID;
+		public void setId(int id) {
+			this.id = id;
 		}
-		public char getPassWard() {
-			return PassWard;
+		
+		public String getPassword() {
+			return password;
 		}
-		public void setPassWard(char passWard) {
-			PassWard = passWard;
+		public void setPassword(String password) {
+			this.password = password;
 		}
-		public char getUserName() {
-			return userName;
+		
+		public String getUsername() {
+			return username;
 		}
-		public void setUserName(char userName) {
-			this.userName = userName;
+		public void setUsername(String username) {
+			this.username = username;
 		}
-		public int getRoleID() {
-			return roleID;
+		
+		public String getName() {
+			return name;
 		}
-		public void setRoleID(int roleID) {
-			this.roleID = roleID;
+		public void setName(String name) {
+			this.name = name;
 		}
-		public int getLand() {
-			return land;
+		
+		public String getMail() {
+			return mail;
 		}
-		public void setLand(int land) {
-			this.land = land;
+		public void setMail(String mail) {
+			this.mail = mail;
 		}
+		
+		public String getQq() {
+			return qq;
+		}
+		public void setQq(String qq) {
+			this.qq = qq;
+		}
+		
+		public String getPhone() {
+			return phone;
+		}
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
+		
+		public int getRole() {
+			return role;
+		}
+		public void setRole(int role) {
+			this.role = role;
+		}	
 		
 }

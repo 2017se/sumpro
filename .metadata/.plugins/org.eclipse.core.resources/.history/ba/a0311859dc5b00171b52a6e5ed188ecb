@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-28 16:11:39 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.user" table="USER">
+        <id name="id" type="int" access="field">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="wassward" type="char" access="field">
+            <column name="WASSWARD" />
+        </property>
+        <property name="username" type="char" access="field">
+            <column name="USERNAME" />
+        </property>
+        <property name="name" type="int" access="field">
+            <column name="NAME" />
+        </property>
+        <property name="mail" type="int" access="field">
+            <column name="MAIL" />
+        </property>
+        <property name="qq" type="char" access="field">
+            <column name="QQ" />
+        </property>
+        <property name="phone" type="char" access="field">
+            <column name="PHONE" />
+        </property>
+        <property name="role" type="int" access="field">
+            <column name="ROLE" />
+        </property>
+    </class>
+</hibernate-mapping>
