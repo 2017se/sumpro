@@ -1,3 +1,9 @@
+/******************************************************************
+ * 7.4 添加方法getQuesListByUser（根据userID查找问卷）
+ * 7.5  修改setq的实现：questionnaire.id由数据库创建，save之前不能使用getId
+ *         fix：使用List.get(0)前先检验是否为null
+ ******************************************************************/
+
 package daoimpl;
 
 import dao.questionnairedao;
@@ -13,15 +19,18 @@ public class questionnairedaoimpl extends HibernateDaoSupport implements questio
 	public questionnaire getq(int id) {
 		List<questionnaire> u=(List<questionnaire>) getHibernateTemplate()
 				.find("from questionnaire as qu where qu.id=?",id);
+		if(u.isEmpty()){
+			return null;
+		}
 		return u.get(0);
 	}
 
 	@Override
-	public boolean setq(questionnaire q) {
-		 int id=q.getId();
-		 getHibernateTemplate().merge(q);
-		 if(q==getq(id))return true;
-		 return false;
+	public int setq(questionnaire q) {
+		
+		 getHibernateTemplate().save(q);
+		 getHibernateTemplate().flush();
+		 return q.getId();
 	}
 
 	@Override
@@ -36,11 +45,20 @@ public class questionnairedaoimpl extends HibernateDaoSupport implements questio
 	@Override
 	public boolean deleteq(int id) {
 		questionnaire qu=getq(id);//找到删除目标
-		if(qu!=null){
-		getHibernateTemplate().delete(qu);
-		if(getq(id)==null)return true;
+		if(qu != null){
+			getHibernateTemplate().delete(qu);
+			if(getq(id) == null)
+				return true;
 		}
 		return false;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<questionnaire> getQuesListByUser(int userId) {
+		List<questionnaire> quesList = (List<questionnaire>) getHibernateTemplate()
+				.find("from questionnaire as ques where ques.u_id=?",userId);
+		return quesList;
 	}
 
 }

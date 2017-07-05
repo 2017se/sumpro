@@ -20,5 +20,10 @@
 		<result name="none">/fail.jsp</result>
 	</action>
 	
+	<action name="Test" class="action.TestAction">
+		<result name="success">/succ.jsp</result>
+		<result name="none">/fail.jsp</result>
+	</action>
+	
 	</package>
 </struts>

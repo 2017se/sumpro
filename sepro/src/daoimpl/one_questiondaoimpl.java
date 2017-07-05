@@ -1,6 +1,7 @@
 /********************************************************************************* 
  * 6.30 修改拼写：one_questioimpl.java->one_questionimpl.java
  *      修改hql语句中ONE_QUESTION->one_question[hql语法里面是POJO对象而不是table]
+ * 7.5   fix：使用List.get(0)前先检验是否为empty
  *********************************************************************************/
 
 package daoimpl;
@@ -20,6 +21,9 @@ public class one_questiondaoimpl extends HibernateDaoSupport implements one_ques
 	public one_question geto_q(int q_id) {
 		List<one_question> questions = (List<one_question>)getHibernateTemplate()
 				.find("from one_question as question where question.id=?", q_id);
+		if(questions.isEmpty()){
+			return null;
+		}
 		return questions.get(0);
 	}
 
@@ -42,8 +46,10 @@ public class one_questiondaoimpl extends HibernateDaoSupport implements one_ques
 	}
 
 	@Override
-	public boolean creo_q(one_question o_q) {
-		return (boolean) getHibernateTemplate().save(o_q);
+	public int creo_q(one_question o_q) {
+		getHibernateTemplate().save(o_q);
+		getHibernateTemplate().flush();
+		return o_q.getId();
 	}
 
 }

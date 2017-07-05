@@ -4,13 +4,12 @@
 <!-- Generated 2017-6-30 14:31:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="model.q_options" table="Q_OPTIONS">
-        <id name="q_id" type="int">
-            <column name="Q_ID" />
-            <generator class="assigned" />
-        </id>
-        <property name="title" type="java.lang.String">
-            <column name="TITLE" />
-        </property>
+    	<!-- 复合主键使用composite-id标签 -->
+        <composite-id>
+        	<!-- key-property标签表示哪些属性对应复合主键 -->
+        	<key-property name="q_id" column="Q_ID" type="int"></key-property>
+        	<key-property name="title" column="TITLE" type="java.lang.String"></key-property>
+        </composite-id>
         <property name="property" type="java.lang.String">
             <column name="PROPERTY" />
         </property>

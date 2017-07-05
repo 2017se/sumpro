@@ -4,13 +4,14 @@
  *      添加变量set_time，end_time：根据数据库设计修改
  * 7.3  增加成员 List<one_question>questions, 表示一个questionnaire对
  *      应的所有question
+  * 7.4 修改List->Set，使用hibernate一对多映射
  *****************************************************************/
 
 package model;
 
 import java.sql.Time;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 import model.one_question;
 
@@ -66,13 +67,13 @@ public class questionnaire {
 		}
 		
 		/*questions: questions of a questionnaire*/
-		private List<one_question> questions = new ArrayList<one_question>();
+		private Set<one_question> questions = new HashSet<one_question>();
 		
-		public List<one_question> getQuestions() {
+		public Set<one_question> getQuestions() {
 			return questions;
 		}
 		
-		public void setQuestions(List<one_question> questions) {
+		public void setQuestions(Set<one_question> questions) {
 			this.questions = questions;
 		}
 

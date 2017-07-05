@@ -3,14 +3,15 @@
  *      根据数据库设计重写
  * 7.3  增加成员 List<q_options> Options, 表示一个question对应的所有
  *      选项
+ * 7.4 修改List->Set，使用hibernate一对多映射
  *****************************************************************/
 
 package model;
 
 import model.q_options;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class one_question {
 	
@@ -64,13 +65,13 @@ public class one_question {
 	}
 
 	
-	private List<q_options> options = new ArrayList<q_options>();
+	private Set<q_options> options = new HashSet<q_options>();
 	
-	public List<q_options> getOptions() {
+	public Set<q_options> getOptions() {
 		return options;
 	}
 	
-	public void setOptions(List<q_options> options) {
+	public void setOptions(Set<q_options> options) {
 		this.options = options;
 	}
 

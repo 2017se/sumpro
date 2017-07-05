@@ -6,7 +6,7 @@
     <class name="model.one_question" table="ONE_QUESTION">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="q_id" type="int">
             <column name="Q_ID" />
@@ -23,5 +23,9 @@
         <property name="nessecity" type="int">
             <column name="NESSECITY" />
         </property>
+        <set name="options" lazy="false" inverse="true" cascade="delete">
+        	<key column="q_id" />
+        	<one-to-many class="model.q_options"  not-found="ignore" />
+        </set>
     </class>
 </hibernate-mapping>

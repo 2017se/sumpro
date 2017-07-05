@@ -6,7 +6,7 @@
     <class name="model.user" table="USER">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="password" type="java.lang.String">
             <column name="PASSWORD" />
