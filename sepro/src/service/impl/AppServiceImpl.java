@@ -4,6 +4,10 @@
 
 package service.impl;
 
+import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
+
 import model.answer_questionnaire;
 import model.answers;
 import model.one_question;
@@ -11,16 +15,12 @@ import model.questionnaire;
 import model.user;
 import model.q_options;
 
-import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import dao.answerdao;
 import dao.one_questiondao;
 import dao.q_optiondao;
 import dao.questionnairedao;
 import dao.userdao;
+import dao.answer_questionnairedao;
 
 import service.AppService;
 
@@ -32,6 +32,7 @@ public class AppServiceImpl implements AppService {
 	private q_optiondao q_optiondao;
 	private questionnairedao questionnairedao;
 	private userdao userdao;
+	private answer_questionnairedao answer_questionnairedao;
 	
 	
 	//setter注入
@@ -113,7 +114,6 @@ public class AppServiceImpl implements AppService {
 		String phoneTemp = user.getPhone();
 		String mailTemp = user.getMail();
 		
-		
 		//检查username是否存在
 		user oneUser = userdao.getUserByUsername(usernameTemp);
 		if(oneUser != null){ //exists
@@ -194,10 +194,7 @@ public class AppServiceImpl implements AppService {
 				q_optiondao.setqo(option);
 			}
 		}
-
 		return 0;
-		
-
 	}
 
 	
@@ -243,7 +240,6 @@ public class AppServiceImpl implements AppService {
 					//then update questions
 					one_questiondao.updateo_q(one_ques);
 				} else {
-					//TODO delete
 					one_questiondao.delo_q(one_ques.getId());
 				}
 			}
@@ -254,6 +250,14 @@ public class AppServiceImpl implements AppService {
 		return -1;
 	}
 
+	
+	/**
+	 * void updateOptionSet(Set<q_options> optionSet, int quesId);
+	 * <p>说明：<b>用于Service层updateQuesContent()方法的实现，action层不建议调用该接口。
+	 * @param optionSet 需要更新的one_question实例关联的options构成的Set
+	 * @param quesId one_question实例的id
+	 * */
+	
 	@Override
 	 public void updateOptionSet(Set<q_options> optionSet, int quesId) {
 		Iterator<q_options> it = optionSet.iterator();
@@ -283,8 +287,8 @@ public class AppServiceImpl implements AppService {
 				}
 			}
 		}
-		 
 	 }
+	
 	
 	/**
 	 * int deleteQuesContent(questionnaire ques);
@@ -305,23 +309,27 @@ public class AppServiceImpl implements AppService {
 		}
 	}
 
-	/*
+	
+	/**
 	 * user getUserInfo(int id);
 	 * 参数：用户id
 	 * 返回：对应的user实例，失败返回null
 	 * 说明：根据用户id查找用户并返回。用于用户浏览用户信息。
 	 * */
+	
 	@Override
 	public user getUserInfo(int id) {
 		return userdao.get_one(id);
 	}
 
-	/*
+	
+	/**
 	 * int updateUserInfo(user user);
 	 * 参数：user实例
 	 * 返回：更新状态（成功返回0，失败返回-1）
 	 * 说明：更新用户信息，不需要重新创建。用于用户修改用户信息。
 	 * */
+	
 	@Override
 	public int updateUserInfo(user user) {
 		if(userdao.updateuser(user) == true){
@@ -330,28 +338,117 @@ public class AppServiceImpl implements AppService {
 		return -1;
 	}
 
+	
+	/**
+	 * List<answer_questionnaire> getQuesListFilled(int userId)
+	 * 参数：用户id
+	 * 返回：用户所填写的所有answer_questionnaire构成的List
+	 * 说明：从answer_questionnaire和questionnaire中查找，List中存储的应该是完整的
+	 *       answer_questionnaire的实例，即answer_questionnaire的questionnaire属性
+	 *       需要不为null。<p>用于在前端“我填写的问卷”中展示 问卷简介或缩略图。
+	 * */
+	
 	@Override
 	public List<answer_questionnaire> getQuesListFilled(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		// 用户填写过的所有answer_questionnaire
+		List<answer_questionnaire> answer_questionnaireList = 
+				answer_questionnairedao.getAnswer_questionnaireByUser(userId);
+		
+		answer_questionnaire ans_ques;
+		questionnaire ques;
+		Iterator<answer_questionnaire> it = answer_questionnaireList.iterator();
+		while(it.hasNext()){
+			//填充每个answer_questionnaire的questionnaire属性
+			ans_ques = it.next();
+			ques = questionnairedao.getq(ans_ques.getQ_id());
+			ans_ques.setQuestionnaire(ques);
+		}
+		
+		return answer_questionnaireList;
 	}
 
+	
+	/**
+	 * answer_questionnaire getQuesContentFilled(int userId,int quesId);
+	 * 参数：问卷填写者user实例的id和问卷questionnaire实例的id
+	 * 返回：完整的answer_questionnaire实例
+	 * 说明：返回完整的answer_questionnaire实例，其中questionnaire和ansList属性不允许
+	 *       为空，且questionnaire实例中的questions属性及one_question实例的options属
+	 *       性均不允许为空。用于用户浏览已填写的问卷。
+	 * */
+	
 	@Override
 	public answer_questionnaire getQuesContentFilled(int userId,int quesId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		answer_questionnaire ans_ques = answer_questionnairedao.getAnswer_questionnaire(userId, quesId);
+		if(ans_ques == null){
+			return null;
+		}
+		
+		// 填充questionnaire属性
+		questionnaire ques = questionnairedao.getq(ans_ques.getQ_id());
+		ans_ques.setQuestionnaire(ques);
+		
+		// 填充ansList属性
+		answers ans;
+		for(one_question one_ques : ques.getQuestions()){
+			ans = answerdao.getan(one_ques.getId(), userId);
+			ans_ques.getAnsList().add(ans);
+		}
+		
+		return ans_ques;
 	}
 
+	
+	/**
+	 * int saveAnswerList(List<answers> ansList);
+	 * <p>参数：由answer实例构成的ansList列表
+	 * <p>说明：<b>如果ansList中某个实例在answers表中已经存在，则更新该条记录，如果没有则创建
+	 *      answers实例。用于<u>保存或更新</u>用户的答案。<u>不建议action层直接调用。</u>
+	 * */
+	
 	@Override
-	public int saveAnswerList(List<answers> ansList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void saveAnswerList(List<answers> ansList) {
+		answers ansTemp;
+		for(answers ans: ansList){
+			ansTemp = answerdao.getan(ans.getO_id(), ans.getU_id());
+			if(ansTemp == null){
+				// not exist, save the answer object
+				answerdao.setan(ans);
+			} else {
+				//exist, update the object
+				answerdao.updatean(ans);
+			}
+		}
 	}
 
+	
+	/**
+	 * int saveAnsQuesRecord(answer_questionnaire ansQuesRecord);
+	 * <p>参数：answer_questionnaire实例
+	 * <p>说明：<b>参数可以是不完整的answer_questionnaire实例，即只需要拥有q_id，u_id，
+	 *      submit_time和if_complete属性，并且要求ansList属性不为空。questionnaire
+	 *      属性不作要求。ansList中具体的answers内容需调用saveAnswerList()方法保存。
+	 *      用于<u>保存或更新</u>用户填写问卷的内容。
+	 * */
+	
 	@Override
-	public int saveAnsQuesRecord(answer_questionnaire ansQuesRecord) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void saveAnsQuesContent(answer_questionnaire ansQuesContent) {
+		
+		answer_questionnaire ansQuesRecord = answer_questionnairedao
+				.getAnswer_questionnaire(ansQuesContent.getU_id(), ansQuesContent.getQ_id());
+		
+		//check if exists
+		if(ansQuesRecord == null){
+			//not exist,save the answer_questionnaire object
+			answer_questionnairedao.saveAnswer_questionnaire(ansQuesContent);
+		} else{
+			//exist, update
+			answer_questionnairedao.updateAnswer_questionnaire(ansQuesContent);
+		}
+		
+		//then save the answer List
+		saveAnswerList(ansQuesContent.getAnsList());
 	}
 
 }

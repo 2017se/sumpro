@@ -89,7 +89,7 @@ public interface AppService {
 	 *       questionnaire的id（为了接口统一所以封装成questionnaire）。只需要在
 	 *       questionnaire表中删除，其余由数据库CASCADE约束实现。用于删除问卷。
 	 * */
-	int deleteQuesContent(questionnaire ques);
+	public int deleteQuesContent(questionnaire ques);
 	
 	
 	/**
@@ -123,7 +123,6 @@ public interface AppService {
 	public List<answer_questionnaire> getQuesListFilled(int userId);
 	
 	
-	
 	/**
 	 * answer_questionnaire getQuesContentFilled(int userId,int quesId);
 	 * 参数：问卷填写者user实例的id和问卷questionnaire实例的id
@@ -132,31 +131,35 @@ public interface AppService {
 	 *       为空，且questionnaire实例中的questions属性及one_question实例的options属
 	 *       性均不允许为空。用于用户浏览已填写的问卷。
 	 * */
-	answer_questionnaire getQuesContentFilled(int userId,int quesId);
+	public answer_questionnaire getQuesContentFilled(int userId,int quesId);
 	
 	
 	/**
 	 * int saveAnswerList(List<answers> ansList);
-	 * 参数：由answer实例构成的ansList列表
-	 * 返回：保存状态，成功返回0，失败返回-1
-	 * 说明：ansList由Action或者jsp构造，如果ansList中某个实例在answers表中已经存在，则
-	 *      更新该条记录，如果没有则创建answers实例。用于用户填写问卷。
+	 * <p>参数：由answer实例构成的ansList列表
+	 * <p>说明：<b>如果ansList中某个实例在answers表中已经存在，则更新该条记录，如果没有则创建
+	 *      answers实例。用于<u>保存或更新</u>用户的答案。<u>不建议action层直接调用。</u>
 	 * */
-	int saveAnswerList(List<answers> ansList);
+	public void saveAnswerList(List<answers> ansList);
 	
 	
 	/**
 	 * int saveAnsQuesRecord(answer_questionnaire ansQuesRecord);
-	 * 参数：answer_questionnaire实例
-	 * 返回：保存状态，成功返回0，失败返回-1
-	 * 说明：参数可以是不完整的answer_questionnaire实例，即只需要拥有q_id，u_id，submit_time
-	 *      和if_complete属性，具体的answers内容应该由saveAnswerList()方法保存。用于保存用户
-	 *      填写问卷的记录。
+	 * <p>参数：answer_questionnaire实例
+	 * <p>说明：<b>参数可以是不完整的answer_questionnaire实例，即只需要拥有q_id，u_id，
+	 *      submit_time和if_complete属性，并且要求ansList属性不为空。questionnaire
+	 *      属性不作要求。ansList中具体的answers内容需调用saveAnswerList()方法保存。
+	 *      用于<u>保存或更新</u>用户填写问卷的内容。
 	 * */
-	 int saveAnsQuesRecord(answer_questionnaire ansQuesRecord);
+	 public void saveAnsQuesContent(answer_questionnaire ansQuesRecord);
 	 
 	 
-	/* 自己定义的 private接口，用于以上接口的实现  */
-	 public void updateOptionSet(Set<q_options> optionSet, int quesId);
+	/**
+	 * void updateOptionSet(Set<q_options> optionSet, int quesId);
+	 * <p>说明：<b>用于Service层updateQuesContent()方法的实现，action层不建议调用该接口。
+	 * @param optionSet 需要更新的one_question实例关联的options构成的Set
+	 * @param quesId one_question实例的id
+	 * */
+	public void updateOptionSet(Set<q_options> optionSet, int quesId);
 	
 }
