@@ -61,7 +61,6 @@ public class answer_questionnairedaoimpl
 
 	@Override
 	public boolean deleteAnswer_questionnaire(int UserId, int questionnaireId) {
-		// TODO Auto-generated method stub
 		answer_questionnaire ans_ques = getAnswer_questionnaire(UserId, questionnaireId);
 		if(ans_ques != null){
 			getHibernateTemplate().delete(ans_ques);
