@@ -52,7 +52,7 @@ font-size:13px;
    <tbody>
      <tr style="height:160px" >
          <td>
-             <img src="../picture/sgow.png" width="650px" height="145px" />
+             <img src="../picture/sgow.png" width="950px" height="145px" />
          
          </td>
         

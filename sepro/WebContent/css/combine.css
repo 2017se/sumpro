@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+.divcss5-top,.divcss5-bottom{width:300px;height:100px;border:1px solid #F00;padding:0px}
+.divcss5-bottom{ margin-top:10px}
+
+.aa{ 
+	width:120px; 
+	float:left;
+}   
+.aa li{
+	 padding:5px;
+	 cursor:pointer;
+} 
+.bb{ 
+	  width:700px; 
+	  float:left; 
+	  background:#00ff00;
+}//左侧导航栏的实现
+	   
+.boxa,.boxb{ margin:0 auto; width:400px;} 
+.boxa-l{ float:left; width:280px; height:80px; border:1px } 
+.boxa-r{ float:right; width:100px; height:80px; border:1px } 
+.boxb{ border:1px ; height:40px;}
+	   
+nec{color:red}
+.box1 {width:70%; float:left; display:inline;}
+.box2 {width:30%; float:left; display:inline;}//并排div的实现
+
+.leader{ 
+	font-family:"斜体"; 
+	font-size:18px;
+	color=#000000;
+}//标题所用css
+
+div{
+display:inline
+}
+
+.logo_img{
+position:absolute;
+top:50px
+}
+
+.form-search {
+align="right";
+font-size:13px;
+}
+
+
+  <script type="text/javascript">
+function setTab(m,n)
+{
+	var tli=document.getElementById("leftmenu"+m).getElementsByTagName("li");
+	var mli=document.getElementById("mcont"+m).getElementsByTagName("ul");
+	for(i=0;i<tli.length;i++){    
+		tli[i].className=i==n?"hover":"";
+		mli[i].style.display=i==n?"block":"none"; 
+		}
+	}
+	</script>
