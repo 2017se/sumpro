@@ -9,8 +9,8 @@
 
 package model;
 
-import java.sql.Time;
 import java.util.Set;
+import java.util.Date;
 import java.util.HashSet;
 
 import model.one_question;
@@ -21,8 +21,8 @@ public class questionnaire {
 		private int u_id;//
 		private String title; //标题
 		private String instruction; //问卷说明
-		private Time set_time;
-		private Time end_time;
+		private Date set_date;
+		private Date end_date;
 		
 		public int getId() {
 			return id;
@@ -52,18 +52,18 @@ public class questionnaire {
 			this.instruction = instruction;
 		}
 		
-		public Time getSet_time() {
-			return set_time;
+		public Date getSet_date() {
+			return set_date;
 		}
-		public void setSet_time(Time set_time) {
-			this.set_time = set_time;
+		public void setSet_date(Date set_date) {
+			this.set_date = set_date;
 		}
 		
-		public Time getEnd_time() {
-			return end_time;
+		public Date getEnd_date() {
+			return end_date;
 		}
-		public void setEnd_time(Time end_time) {
-			this.end_time = end_time;
+		public void setEnd_date(Date end_date) {
+			this.end_date = end_date;
 		}
 		
 		/*questions: questions of a questionnaire*/

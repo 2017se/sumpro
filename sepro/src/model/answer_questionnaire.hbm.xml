@@ -10,7 +10,7 @@
         	<key-property name="q_id" column="Q_ID" type="int"></key-property>
         	<key-property name="u_id" column="U_ID" type="int"></key-property>
         </composite-id>
-        <property name="submit_time" type="java.sql.Time">
+        <property name="submit_time" type="java.util.Date">
             <column name="SUBMIT_TIME" />
         </property>
         <property name="if_complete" type="int">

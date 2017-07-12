@@ -17,11 +17,11 @@
         <property name="instruction" type="java.lang.String">
             <column name="INSTRUCTION" />
         </property>
-        <property name="set_time" type="java.sql.Time">
-            <column name="SET_TIME" />
+        <property name="set_date" type="java.util.Date">
+            <column name="SET_DATE" />
         </property>
-        <property name="end_time" type="java.sql.Time">
-            <column name="END_TIME" />
+        <property name="end_date" type="java.util.Date">
+            <column name="END_DATE" />
         </property>
         <set name="questions" lazy="false" inverse="true" cascade="delete">
         	<key column="q_id" />

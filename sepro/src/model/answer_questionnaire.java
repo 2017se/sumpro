@@ -2,14 +2,16 @@
  *  7.4 添加属性questionnaire，为用户所回答的问卷的内容,ansList为用户的答案构
  *      成的List
  *      实现Serializable的hashCode()和equal()接口，使用hibernate复合主键映射
+ * 7.12 submit_time的类型java.sql.Time->java.util.Date,修改数据库和.hbm.xml
  *******************************************************************/
 
 package model;
 
+import java.beans.Transient;
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.questionnaire;
 import model.answers;
@@ -21,7 +23,7 @@ public class answer_questionnaire implements Serializable {
 	
 	private int u_id;
 	private int q_id;
-	private Time submit_time;
+	private Date submit_time;
 	private int if_complete;
 	
 	public int getU_id() {
@@ -38,10 +40,10 @@ public class answer_questionnaire implements Serializable {
 		this.q_id = q_id;
 	}
 	
-	public Time getSubmit_time() {
+	public Date getSubmit_time() {
 		return submit_time;
 	}
-	public void setSubmit_time(Time submit_time) {
+	public void setSubmit_time(Date submit_time) {
 		this.submit_time = submit_time;
 	}
 	
@@ -76,6 +78,7 @@ public class answer_questionnaire implements Serializable {
 	/* 问卷题目内容   */
 	private questionnaire questionnaire = new questionnaire();
 	
+	@Transient
 	public questionnaire getQuestionnaire() {
 		return questionnaire;
 	}
@@ -86,6 +89,7 @@ public class answer_questionnaire implements Serializable {
 	/* 用户答案   */
 	private List<answers>ansList = new ArrayList<answers>();
 	
+	@Transient
 	public List<answers> getAnsList() {
 		return ansList;
 	}
