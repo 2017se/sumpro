@@ -58,6 +58,9 @@
 	<bean id="userdao" class="daoimpl.userdaoimpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="answer_questionnairedao" class="daoimpl.answer_questionnairedaoimpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Service -->
 	<bean id="appService" class="service.impl.AppServiceImpl">
@@ -67,6 +70,7 @@
 		<property name="q_optiondao" ref="q_optiondao"></property>
 		<property name="questionnairedao" ref="questionnairedao"></property>
 		<property name="userdao" ref="userdao"></property>
+		<property name="answer_questionnairedao" ref="answer_questionnairedao"></property>
 	</bean>
 	
 	<!-- HibernateTransactionManager -->
