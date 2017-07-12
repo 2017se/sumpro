@@ -11,8 +11,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import dao.answer_questionnairedao;
 import model.answer_questionnaire;
 
-public class answer_questionnairedaoimpl 
-	extends HibernateDaoSupport implements answer_questionnairedao{
+public class answer_questionnairedaoimpl extends HibernateDaoSupport implements answer_questionnairedao{
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -46,7 +45,6 @@ public class answer_questionnairedaoimpl
 		answer_questionnaire ans_quesTemp = getAnswer_questionnaire(ans_ques.getU_id(), ans_ques.getQ_id());
 		if(ans_quesTemp == null){
 			getHibernateTemplate().save(ans_ques);
-			getHibernateTemplate().flush();
 			return true;
 		}
 		return false; //if exists the rocord

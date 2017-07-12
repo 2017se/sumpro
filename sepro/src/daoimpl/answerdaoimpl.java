@@ -19,12 +19,16 @@ public class answerdaoimpl extends HibernateDaoSupport implements answerdao {
 	public answers getan(int o_id, int u_id){
 		List<answers> ans =(List<answers>) getHibernateTemplate()
 				.find("from answers as ans where ans.o_id=? and ans.u_id=?", o_id, u_id);
+		if(ans.isEmpty()){
+			return null;
+		}
 		return ans.get(0);
 	}
 
 	@Override
 	public boolean setan(answers an) {
-		return (boolean) getHibernateTemplate().save(an);
+		getHibernateTemplate().save(an);
+		return true;
 	}
 
 	@Override

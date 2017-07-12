@@ -16,6 +16,18 @@ public class user {
 		private String phone;
 		private int role;
 		
+		public user(){
+			
+		}
+		
+		public user(String username, String name, String mail, String qq, String phone){
+			this.username = username;
+			this.name = name;
+			this.mail = mail;
+			this.qq = qq;
+			this.phone = phone;
+		}
+		
 		public int getId() {
 			return id;
 		}
@@ -70,6 +82,6 @@ public class user {
 		}
 		public void setRole(int role) {
 			this.role = role;
-		}	
+		}
 		
 }
