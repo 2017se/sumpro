@@ -10,6 +10,7 @@ import java.util.Set;
 import model.user;
 import model.answer_questionnaire;
 import model.answers;
+import model.one_question;
 import model.q_options;
 import model.questionnaire;
 
@@ -161,5 +162,32 @@ public interface AppService {
 	 * @param quesId one_question实例的id
 	 * */
 	public void updateOptionSet(Set<q_options> optionSet, int quesId);
+	
+	
+	/**
+	 * int saveQuestionnaire(questionnaire ques);
+	 * <p>参数：questionnaire实例
+	 * <p>返回：保存到数据库之后返回的questionnaire.id
+	 * <p>说明：参数是不完整的questionnaire实例，不需要拥有id且questions属性可以为空。用于
+	 *         保存新建的问卷。
+	 * **/
+	public int saveQuestionnaire(questionnaire ques);
+	
+	
+	/**
+	 * int saveQuestion(one_question one_ques);
+	 * <p>参数：one_question实例
+	 * <p>返回：保存到数据库之后返回的one_question.id
+	 * <p>说明：参数为不完整的one_question实例，不需要包含id且options属性可以为空。但是需
+	 *         要指定对应的questionnaire的id即q_id属性。用于保存新建问卷中的题目。
+	 * **/
+	public int saveQuestion(one_question one_ques);
+	
+	/**
+	 * void saveOption(q_options opt);
+	 * <p>参数：q_options实例
+	 * <p>说明：q_options没有设置单独的主键，不需要返回值。用于保存新建问卷中的选项。
+	 * **/
+	public void saveOption(q_options opt);
 	
 }

@@ -36,29 +36,67 @@ public class AppServiceImpl implements AppService {
 	
 	
 	//setter注入
-	
+	public answerdao getAnswerdao() {
+		return answerdao;
+	}
+
+
 	public void setAnswerdao(answerdao answerdao) {
 		this.answerdao = answerdao;
 	}
+
+
+	public one_questiondao getOne_questiondao() {
+		return one_questiondao;
+	}
+
 
 	public void setOne_questiondao(one_questiondao one_questiondao) {
 		this.one_questiondao = one_questiondao;
 	}
 
+
+	public q_optiondao getQ_optiondao() {
+		return q_optiondao;
+	}
+
+
 	public void setQ_optiondao(q_optiondao q_optiondao) {
 		this.q_optiondao = q_optiondao;
 	}
+
+
+	public questionnairedao getQuestionnairedao() {
+		return questionnairedao;
+	}
+
 
 	public void setQuestionnairedao(questionnairedao questionnairedao) {
 		this.questionnairedao = questionnairedao;
 	}
 
-	public void setUserdao(userdao userdao){
+
+	public userdao getUserdao() {
+		return userdao;
+	}
+
+
+	public void setUserdao(userdao userdao) {
 		this.userdao = userdao;
+	}
+
+
+	public answer_questionnairedao getAnswer_questionnairedao() {
+		return answer_questionnairedao;
+	}
+
+
+	public void setAnswer_questionnairedao(answer_questionnairedao answer_questionnairedao) {
+		this.answer_questionnairedao = answer_questionnairedao;
 	}
 	
 	
-	/* 
+	/**
 	 * 登录 
 	 * 参数1可以是username，email或phone，参数2是密码
 	 * 如果匹配成功，返回该user，用户不存在或密码不正确返回null
@@ -99,7 +137,7 @@ public class AppServiceImpl implements AppService {
 	}
 
 	
-	/*
+	/**
 	 * 注册
 	 * 参数是user,是action临时创建的user对象，包含username，phone，password
 	 * 用户名已存在返回-1，phone已存在返回-2，mail已存在返回-3
@@ -218,7 +256,6 @@ public class AppServiceImpl implements AppService {
 		while(it.hasNext()){
 		//for(one_question one_ques : ques.getQuestions()){
 			one_question one_ques = it.next();
-			System.out.println(one_ques.getId());
 			one_question one_quesTemp = one_questiondao.geto_q(one_ques.getId());
 			if(one_quesTemp == null){
 				//object not exist in database
@@ -424,7 +461,7 @@ public class AppServiceImpl implements AppService {
 
 	
 	/**
-	 * int saveAnsQuesRecord(answer_questionnaire ansQuesRecord);
+	 * int saveAnsQuesContent(answer_questionnaire ansQuesRecord);
 	 * <p>参数：answer_questionnaire实例
 	 * <p>说明：<b>参数可以是不完整的answer_questionnaire实例，即只需要拥有q_id，u_id，
 	 *      submit_time和if_complete属性，并且要求ansList属性不为空。questionnaire
@@ -449,6 +486,47 @@ public class AppServiceImpl implements AppService {
 		
 		//then save the answer List
 		saveAnswerList(ansQuesContent.getAnsList());
+	}
+
+	
+	/**
+	 * int saveQuestionnaire(questionnaire ques);
+	 * <p>参数：questionnaire实例
+	 * <p>返回：保存到数据库之后返回的questionnaire.id
+	 * <p>说明：参数是不完整的questionnaire实例，不需要拥有id且questions属性可以为空。用于
+	 *         保存新建的问卷。
+	 * **/
+	
+	@Override
+	public int saveQuestionnaire(questionnaire ques) {
+		return questionnairedao.setq(ques);
+	}
+
+	
+	/**
+	 * int saveQuestion(one_question one_ques);
+	 * <p>参数：one_question实例
+	 * <p>返回：保存到数据库之后返回的one_question.id
+	 * <p>说明：参数为不完整的one_question实例，不需要包含id且options属性可以为空。但是需
+	 *         要指定对应的questionnaire的id即q_id属性。用于保存新建问卷中的题目。
+	 * **/	
+	
+	@Override
+	public int saveQuestion(one_question one_ques) {
+		return one_questiondao.creo_q(one_ques);
+	}
+
+	
+	/**
+	 * void saveOption(q_options opt);
+	 * <p>参数：q_options实例
+	 * <p>说明：q_options没有设置单独的主键，不需要返回值。用于保存新建问卷中的选项。
+	 * **/
+	
+	@Override
+	public void saveOption(q_options opt) {
+		q_optiondao.setqo(opt);
+		
 	}
 
 }
