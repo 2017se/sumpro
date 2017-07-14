@@ -12,6 +12,8 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/dataTables.bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	
+	<script src="../js/saveAnswers.js"></script>
   
   
   <script type="text/javascript">
@@ -66,6 +68,10 @@ div{
 display:inline
 }
 
+submit_location{
+position:relative;
+left:1040px
+}
 
 .logo_img{
 position:absolute;
@@ -193,6 +199,9 @@ font-size:13px;
 		  		<form name="blankQ">
 		  		<input id="<%=question.getId() %>" name="<%=question.getTitle_num() %>" style="width:600px;height:100px;margin-left:100px; margin-top:20px" class="input-text"  type="text" colour="white" size="40"  height=30px/>
 			<br /><br />
+		  			<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
+		  			<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  			<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
 		  		</form>
 		  	</div><br>
 		 <% }          
@@ -200,6 +209,9 @@ font-size:13px;
         else if(question.getType()==1){ %>
 				<div class="mulChooseQuestion">
 					<form name="mulQ">
+						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
+						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
 						<%while(option_it.hasNext()){
 							 option=option_it.next();
 						%>
@@ -215,6 +227,9 @@ font-size:13px;
         	 %>
 				<div class="sinChooseQuestion">
 					<form name="sinQ">
+						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
+						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
 						<%while(option_it.hasNext()){ 
 							 option=option_it.next();
 						%>
@@ -230,6 +245,7 @@ font-size:13px;
     </tbody>
     
     </table>
+     <submit_location><button type="button" class="btn btn-default pull-center" id="submit-answer" value="提交">提交</button></submit_location>
     </div>       
  	
 
@@ -239,5 +255,16 @@ font-size:13px;
 	   <ul class="block" style="display: none">4444444444</ul>
   </div> 
   
+  	<%
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String date=df.format(new Date());
+	%>
+  
+  	<p hidden>
+		<input type="text" name="quesnum" value="<%=quesContent.getQuestions().size()%>">
+		<input type="text" name="date" value="<%=date %>">
+		<input type="text" name="userid" value="<%//=user.getId()%>">
+		<input type="text" name="questionnaireid" value="<%=quesContent.getId() %>">
+	</p>
   </body> 
 </html>
