@@ -1,0 +1,172 @@
+body {
+	margin:0px;
+	padding:0px
+}
+
+img {
+	width:100%;
+	height:100%;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.header{
+	margin:0px;
+	width:100%;
+	min-width:1320px;
+	height:80px;
+	position:fixed;
+	background-color:#FFFFFF;
+	border-width:0px 0px 1px 0px;
+	border-style:solid;
+	border-color:grey;
+	z-index:10000;
+}
+
+.header-placeholder{
+	width:100%;
+	height:80px;
+	margin:0px;
+}
+
+.header-logo{
+	width:200px;
+	height:80px;
+	float:left;
+	margin:0px 20px 0px 20px;
+}
+
+.header-menu{
+	padding:10px 10px 10px 10px;
+	margin:15px 15px 15px 60px;
+	float:left;
+	font-family:"Microsoft YaHei","ºÚÌå";
+	font-size:22px;
+	color:grey;
+}
+
+.header-menu-span{
+	margin:0px 20px 0px 20px;
+	padding:10px 35px 10px 35px;
+}
+
+.header-menu-span-current{
+	margin:0px 20px 0px 20px;
+	padding:10px 35px 10px 35px;
+	border-bottom:1px solid grey;
+}
+
+.header-username{
+	float:right;
+	padding:30px 80px 20px 40px;
+	color:grey;
+	font-size:20px;
+	font-family:"Microsoft YaHei","ºÚÌå";
+}
+
+.body-container{
+	width:66.7%;
+	margin:0 auto;
+	padding:10px 0px 10px 0px;
+}
+
+.area-container{
+	width:100%;
+	font-family:"Microsoft YaHei","ºÚÌå";
+	color:grey;
+	margin:40px 0px 60px 0px;
+}
+
+.area-header{
+	height:30px;
+}
+
+.area-header-title{
+	float:left;
+	font-size:20px;
+}
+
+.area-header-edit{
+	float:right;
+	font-size:16px;
+	margin:0px 10px 0px 10px;
+	cursor:pointer;
+}
+
+.area-body{
+	font-size:16px;
+	border:1px solid grey;
+	margin:5px 0px 5px 0px;
+	padding: 10px 10px 10px 10px;
+	position:relative;
+}
+
+.area-body-info{
+	width:600px;
+	padding:10px 10px 10px 10px;
+	max-height:21px;
+}
+
+.area-body-info-title{
+	display:inline-block;
+	display:-moz-inline-box;
+	min-width:65px;
+}
+
+.area-body-img-container{
+	position:absolute;
+	bottom:5px;
+	right:75px;
+	width:110px;
+	height:170px;
+}
+
+.area-body-img-box{
+	width:110px;
+	height:110px;
+	border-radius:50%;
+	background-color:#c0c0c0;
+}
+
+.area-body-img{
+	width:110px;
+	height:110px;
+	border-radius:50%;
+}
+
+.area-body-img-button{
+	text-align:center;
+	margin:15px 0px 15px 0px;
+	cursor:pointer;
+}
+
+.questionnaire-box{
+	width:220px;
+	height:300px;
+	float:left;
+	border:1px solid grey;
+	display:inline;
+	margin:10px 30px 10px 55px;
+	position:relative;
+}
+
+.questionnaire-title{
+	font-size:22px;
+	width:200px;
+	height:135px;
+	padding:20px 10px 20px 10px;
+}
+
+.questionnaire-date{
+	font-size:14px;
+	color:#a0a0a0;
+	width:200px;
+	height:20px;
+	padding:5px 10px 5px 10px;
+}
+
+
+
