@@ -7,11 +7,11 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
-	<package name="process" extends="struts-default">
+	<package name="process" extends="struts-default,json-default">
 	
 	<!-- login -->
 	<action name="Login" class="action.LoginAction">
-		<result name="success">/succ.jsp</result>
+		<result name="success" type="redirect">publishQuestionnaire</result>
 		<result name="none">/fail.jsp</result>
 	</action>
 	
@@ -20,9 +20,46 @@
 		<result name="none">/fail.jsp</result>
 	</action>
 	
+	<!-- 后端测试 -->
 	<action name="Test" class="action.TestAction">
 		<result name="success">/succ.jsp</result>
 		<result name="none">/fail.jsp</result>
+	</action>
+	
+	<!-- 保存新创建的问卷内容(不包含更新问卷内容) -->
+	<action name="saveQuestionnaire" class="action.SaveQuesContentAction">
+		<interceptor-ref name="json"></interceptor-ref>
+		<result name="success">/succ.jsp</result>
+	</action>
+	
+	<!-- 保存或更新答案内容 -->
+	<action name="saveAnsQues" class="action.SaveAnsQuesContentAction">
+		<interceptor-ref name="json"></interceptor-ref>
+		<result name="success">/succ.jsp</result>
+	</action>
+	
+	<!-- 跳转到“个人中心”页面 -->
+	<action name="personalCenter" class="action.PersonalCenterAction">
+		<result name="success">jsp/personalCenter.jsp</result>
+	</action>
+	
+	<!-- 更新个人信息，并跳转回“个人中心”页面 -->
+	<action name="updateUserInfo" class="action.UpdateUserInfoAction">
+		<result name="success" type="redirectAction">personalCenter</result>
+	</action>
+	
+	<!-- getQuestionnaireListCreated:跳转到“发布问卷”页面 -->
+	<action name="publishQuestionnaire" class="action.GetQuesListCreatedAction">
+		<result name="success">jsp/publishQuestionnaire_cf.jsp</result>
+	</action>
+	
+	<!-- getQuesContent:获取问卷内容，跳转到查看问卷内容的页面 -->
+	<action name="getQuesContent" class="action.GetQuesContentAction">
+		<result name="success">jsp/showQuesContent.jsp</result>
+	</action>
+	
+	<action name="fillQuestionnaire" class="action.GetQuesContentAction">
+		<result name="success">jsp/fillQuestionnaire.jsp</result>
 	</action>
 	
 	</package>
