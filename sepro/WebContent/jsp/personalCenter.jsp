@@ -1,9 +1,9 @@
+<!-- 个人中心页面 -->
 <%@ page import="model.user" %>
 <%@ page import="model.questionnaire" %>
 <%@ page import="model.answer_questionnaire" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,17 +47,17 @@
 		</div>
 		<div class="header-menu">
 			<span class="header-menu-span">
-				<a href="#">问卷发布</a>
+				<a href="publishQuestionnaire.action?userId=<%=user.getId()%>">发布问卷</a>
 			</span>
 			<span class="header-menu-span">
 				<a href="#">问卷模板</a>
 			</span>
 			<span class="header-menu-span">
-				<a href="#">问卷广场</a>
+				<a href="jsp/questionsquare.jsp">问卷广场</a>
 			</span>
 			<!-- 当前页面将其header-menu-span置换为current -->
 			<span class="header-menu-span-current">
-				<a href="#">个人中心</a>
+				<a href="personalCenter.action">个人中心</a>
 			</span>
 		</div>
 		<div class="header-username">
@@ -114,13 +114,16 @@
 				<span class="area-header-title">我创建的问卷</span>
 				<span class="area-header-edit">[ 查看更多 ]</span>
 			</div>
+			<!-- 隐藏表单，用于向展示问卷内容页面的跳转 -->
+			<form action="getQuesContent" method="post" id="get-questionnaire">
+			<input name="questionnaireId" value="" style="display:none">
 			<div class="area-body"><div style="min-height:320px;">
 				<%
 					questionnaire ques = null;
 					for(int i = 0; i < quesListCreated.size(); i++){
 						ques = quesListCreated.get(i);
 				%>
-				<div class="questionnaire-box questionnaire" data-quesid="<%=ques.getId()%>">
+				<div class="questionnaire-box questionnaire-created" data-quesid="<%=ques.getId()%>">
 					<div class="questionnaire-title">
 						<%=ques.getTitle() %>
 					</div>
@@ -141,6 +144,7 @@
 					}
 				%>
 			</div></div>
+			</form>
 		</div>
 		
 		<!-- 我填写的问卷 -->
@@ -149,6 +153,9 @@
 				<span class="area-header-title">我填写的问卷</span>
 				<span class="area-header-edit">[ 查看更多 ]</span>
 			</div>
+			<!-- 隐藏表单，用于向展示问卷内容页面的跳转 -->
+			<form action="fillQuestionnaire" method="post" id="fill-questionnaire">
+			<input name="questionnaireId" value="" style="display:none">
 			<div class="area-body"><div style="min-height:320px;">
 				<%
 					for(answer_questionnaire ansQues : quesListFilled){
@@ -177,6 +184,7 @@
 					}
 				%>	
 			</div></div>
+			</form>
 		</div>
 	</div>
 </body>

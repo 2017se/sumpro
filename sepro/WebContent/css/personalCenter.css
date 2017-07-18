@@ -151,6 +151,7 @@ a {
 	display:inline;
 	margin:10px 30px 10px 55px;
 	position:relative;
+	cursor:pointer;
 }
 
 .questionnaire-title{

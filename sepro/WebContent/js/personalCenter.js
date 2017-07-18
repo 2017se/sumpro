@@ -46,6 +46,20 @@ $(function(){
 		}
 	});
 	
+	$(".questionnaire-created").click(function(e){
+		var dataset = e.currentTarget.dataset;
+		var quesid = dataset.quesid;
+		var obj = document.getElementById("get-questionnaire");
+		$("input[name='questionnaireId']").val(quesid);
+		obj.submit();
+	});
 	
 	
+	$(".answer-questionnaire").click(function(e){
+		var dataset = e.currentTarget.dataset;
+		var quesid = dataset.quesid;
+		var obj = document.getElementById("fill-questionnaire");
+		$("input[name='questionnaireId']").val(quesid);
+		obj.submit();
+	});
 });
