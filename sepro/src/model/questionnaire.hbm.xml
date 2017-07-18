@@ -23,7 +23,7 @@
         <property name="end_date" type="java.util.Date">
             <column name="END_DATE" />
         </property>
-        <set name="questions" lazy="false" inverse="true" cascade="delete">
+        <set name="questions" lazy="false" inverse="true" cascade="delete" order-by="title_num">
         	<key column="q_id" />
         	<one-to-many class="model.one_question"  not-found="ignore" />
         </set>
