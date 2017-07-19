@@ -1,5 +1,6 @@
 /******************************************************************
  * 7.4 添加方法getQuesListByUser（根据userID查找问卷）
+ * 7.18添加方法getAllQuesList（得到所有已发布问卷）
  ******************************************************************/
 package dao;
 
@@ -24,4 +25,6 @@ public interface questionnairedao {
 		//根据userId查找问卷
 		public List<questionnaire> getQuesListByUser(int userId);
 		
+		//得到所有已发布问卷
+		public List<questionnaire> getAllQuesList();
 }
