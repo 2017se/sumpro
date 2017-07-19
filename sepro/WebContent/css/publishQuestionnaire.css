@@ -1,0 +1,17 @@
+.area-body-noborder{
+	font-size:16px;
+	border-top:1px solid grey;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	margin:5px 0px 5px 0px;
+	padding: 10px 10px 10px 10px;
+	position:relative;
+}
+
+.create-button{
+	font-size:60px;
+	color:#acacac;
+	text-aligh:center;
+	margin:50% 40% 50% 40%;
+}
