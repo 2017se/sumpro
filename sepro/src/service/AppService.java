@@ -1,9 +1,12 @@
 /********************************************************************************
  * 7.3 定义创建修改删除问卷、修改用户信息需要的service层接口
+ * 7.18 得到所有已发布问卷的service接口
+ * 7.19 发布问卷的service接口
  *******************************************************************************/
 
 package service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -190,4 +193,19 @@ public interface AppService {
 	 * **/
 	public void saveOption(q_options opt);
 	
+	
+	/**
+	 * List<questionnaire> getAllQuesListPublished();
+	 * <p>返回：数据库中保存且已发布的所有问卷
+	 * <p>说明：set_time不为null即为已发布，并且要求end_time不超过当前时间。用于问卷广场。
+	 * **/
+	public List<questionnaire> getAllQuesListPublished();
+	
+	/**
+	 * boolean publishQuestionnaire(int questionnaireId, Date set_date, Date end_date);
+	 * <p>参数： (int)questionnaire.id, (java.util.Date)set_date, end_date
+	 * <p>返回： true if success, false if fail
+	 * <p>说明：设置set_date和end_date即认为问卷已发布。用于发布问卷。
+	 * **/
+	public boolean publishQuestionnaire(int questionnaireId, Date set_date, Date end_date);
 }
