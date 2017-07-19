@@ -7,11 +7,13 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.convention.classes.reload" value="true" />
 	<package name="process" extends="struts-default,json-default">
 	
 	<!-- login -->
 	<action name="Login" class="action.LoginAction">
-		<result name="success" type="redirect">publishQuestionnaire</result>
+		<result name="success">/jsp/publishQuestionnaire_cf.jsp</result>
 		<result name="none">/fail.jsp</result>
 	</action>
 	
@@ -40,7 +42,7 @@
 	
 	<!-- 跳转到“个人中心”页面 -->
 	<action name="personalCenter" class="action.PersonalCenterAction">
-		<result name="success">jsp/personalCenter.jsp</result>
+		<result name="success">/jsp/personalCenter.jsp</result>
 	</action>
 	
 	<!-- 更新个人信息，并跳转回“个人中心”页面 -->
@@ -50,22 +52,22 @@
 	
 	<!-- publishQuestionnaire:跳转到“发布问卷”页面 -->
 	<action name="publishQuestionnaire" class="action.GetQuesListCreatedAction">
-		<result name="success">jsp/publishQuestionnaire_cf.jsp</result>
+		<result name="success">/jsp/publishQuestionnaire_cf.jsp</result>
 	</action>
 	
 	<!-- getQuesContent:获取问卷内容，跳转到查看问卷内容的页面 -->
 	<action name="getQuesContent" class="action.GetQuesContentAction">
-		<result name="success">jsp/showQuesContent.jsp</result>
+		<result name="success">/jsp/showQuesContent.jsp</result>
 	</action>
 	
 	<!-- 填写问卷 -->
 	<action name="fillQuestionnaire" class="action.GetQuesContentAction">
-		<result name="success">jsp/fillQuestionnaire.jsp</result>
+		<result name="success">/jsp/fillQuestionnaire.jsp</result>
 	</action>
 	
 	<!-- questionnaireSquare：跳转到问卷广场 -->
 	<action name="questionnaireSquare" class="action.GetQuesListPublishedAction">
-		<result name="success">jsp/questionnaireSquare.jsp</result>
+		<result name="success">/jsp/questionnaireSquare.jsp</result>
 	</action>
 	
 	<!-- publishQuesAction：发布问卷(保存set_date和end_date) -->

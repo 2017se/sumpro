@@ -1,0 +1,43 @@
+.ques-table{
+	border-collapse:collapse;
+	border:1px solid #aeaeae;
+	color:grey;
+	width:90%;
+	margin:0 auto
+}
+
+.ques-tr{
+	height:160px;
+	position:relative;
+	border:1px solid #aeaeae;
+	padding:10px 10px 10px 10px;
+}
+
+.ques-header{
+	height:20%;
+	width:100%;
+}
+
+.ques-title{
+	font-size:22px;
+	float:left;
+	margin:5px 0px 0px 10px;
+}
+
+.ques-date{
+	font-size:14px;
+	float:right;
+	margin:15px 10px 0px 0px;
+}
+
+.ques-profile{
+	margin:10px 10px 10px 10px;
+	padding:10px;
+	width:96.5%;
+	height:68%;
+	border:none;
+	background-color:#f0f0f0;
+	font-size:14px;
+	line-height:26px;
+	overflow:hidden;
+}
