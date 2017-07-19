@@ -48,7 +48,7 @@
 		<result name="success" type="redirectAction">personalCenter</result>
 	</action>
 	
-	<!-- getQuestionnaireListCreated:跳转到“发布问卷”页面 -->
+	<!-- publishQuestionnaire:跳转到“发布问卷”页面 -->
 	<action name="publishQuestionnaire" class="action.GetQuesListCreatedAction">
 		<result name="success">jsp/publishQuestionnaire_cf.jsp</result>
 	</action>
@@ -58,9 +58,20 @@
 		<result name="success">jsp/showQuesContent.jsp</result>
 	</action>
 	
+	<!-- 填写问卷 -->
 	<action name="fillQuestionnaire" class="action.GetQuesContentAction">
 		<result name="success">jsp/fillQuestionnaire.jsp</result>
 	</action>
+	
+	<!-- questionnaireSquare：跳转到问卷广场 -->
+	<action name="questionnaireSquare" class="action.GetQuesListPublishedAction">
+		<result name="success">jsp/questionnaireSquare.jsp</result>
+	</action>
+	
+	<!-- publishQuesAction：发布问卷(保存set_date和end_date) -->
+	<action name="publishQuesAction" class="action.PublishQuestionnaireAction" method="publish">
+	</action>
+	
 	
 	</package>
 </struts>
