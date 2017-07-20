@@ -4,6 +4,8 @@
 <%@ page import="model.questionnaire" %>
 <%@ page import="model.one_question" %>
 <%@ page import="model.q_options" %>
+<%@ page import="model.answer_questionnaire" %>
+<%@ page import="model.answers" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -94,8 +96,10 @@ font-size:13px;
   </head>
   
 	<% 
-		questionnaire quesContent=(questionnaire)request.getAttribute("quesContent"); 
-		user user=(user)session.getAttribute("user");
+		answer_questionnaire answer_quesContent=(answer_questionnaire)request.getAttribute("quesContentFilled"); 
+		//user user=(user)session.getAttribute("user");
+		questionnaire quesContent=answer_quesContent.getQuestionnaire();
+		List<answers> answers=answer_quesContent.getAnsList();
 	%>
 
 	   <body>
@@ -106,7 +110,7 @@ font-size:13px;
      	 	 <a href = "#"><font  >问卷模板</font></a> &nbsp 
      		 <a href = "#"><font  >问卷广场</font></a> &nbsp 
     	     <a href = "#"><font  >个人中心 </font></a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-             <font size="3"  ><i class="fa fa-user fa-lg"><%=user%></i></font>
+             <font size="3"  ><i class="fa fa-user fa-lg"><//%=user%></i></font>
    </div>   
  <!-- 头部结束 -->
  
@@ -156,11 +160,17 @@ font-size:13px;
 		Set<one_question> questions=quesContent.getQuestions(); 
 		one_question question;
 		Iterator<one_question> question_it = questions.iterator();
-		
+		String answer="";
 		
 		while (question_it.hasNext()) {  
 		  	question=question_it.next();
 		  	
+		  	for(int i=0;i<answers.size();i++){
+		  		if(answers.get(i).getO_id()==question.getId()){
+		  			answer=answers.get(i).getAnswer();
+		  		}
+		  	}
+		
 		  	Set<q_options> options=question.getOptions();
 		  	q_options option;
 		  	Iterator<q_options> option_it=options.iterator();%>
@@ -179,7 +189,7 @@ font-size:13px;
         <% if(question.getType()==2) { %>  
 			<div class="blankQuestion">  			
 		  		<form name="blankQ">
-		  		<input id="<%=question.getId() %>" name="<%=question.getTitle_num() %>" style="width:600px;height:100px;margin-left:100px; margin-top:20px" class="input-text"  type="text" colour="white" size="40"  height=30px/>
+		  		<input class="blankfill" id="<%=question.getId() %>" name="<%=question.getTitle_num() %>" value="<%=answer%>" disabled="disabled" style="width:600px;height:100px;margin-left:100px; margin-top:20px" class="input-text"  type="text" colour="white" size="40"  height=30px/>
 			<br /><br />
 		  			<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
 		  			<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
@@ -195,15 +205,19 @@ font-size:13px;
 						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
 		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
 						<%while(option_it.hasNext()){
-							 option=option_it.next();
+							 option=option_it.next();	 
+							 if(answer.contains(option.getTitle())){
 						%>
-						<div align="left" style="margin-left:100px;"><label><input align="right" name="<%=question.getTitle_num()%>" type="checkbox" value="<%=option.getTitle()%>" /><%=option.getTitle() %>.<%=option.getProperty() %> </label> </div>
 						
-						<%}%>
+						<div align="left" style="margin-left:100px;"><label><input align="right" disabled="disabled" checked="true" name="<%=question.getTitle_num()%>" type="checkbox" value="<%=option.getTitle()%>" /><%=option.getTitle() %>.<%=option.getProperty() %> </label> </div>
+						
+						<%}else{%>
+						<div align="left" style="margin-left:100px;"><label><input align="right" disabled="disabled" checked="true" name="<%=question.getTitle_num()%>" type="checkbox" value="<%=option.getTitle()%>" /><%=option.getTitle() %>.<%=option.getProperty() %> </label> </div>
+						<%}} %>
 					</form>
 				
 				</div><br>
-			<% } 
+			<%  }
          
          else{
         	 %>
@@ -214,27 +228,41 @@ font-size:13px;
 						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
 						<%while(option_it.hasNext()){ 
 							 option=option_it.next();
+							 if(option.getTitle().equals(answer)){
 						%>
-						 <div align="left" style="margin-left:100px;"><label><input align="right" type="radio" name="<%=question.getTitle_num()%>" value="<%=option.getTitle()%>"><%=option.getTitle()%>.<%=option.getProperty() %><br> </label> </div>
-						<%}%>
+						 <div align="left" style="margin-left:100px;"><label><input align="right" type="radio" disabled="disabled" checked="true" name="<%=question.getTitle_num()%>" value="<%=option.getTitle()%>"><%=option.getTitle()%>.<%=option.getProperty() %><br> </label> </div>
+						<%} else{%>
+						 <div align="left" style="margin-left:100px;"><label><input align="right" type="radio" disabled="disabled" name="<%=question.getTitle_num()%>" value="<%=option.getTitle()%>"><%=option.getTitle()%>.<%=option.getProperty() %><br> </label> </div>
+						<%} 
+						}%>
 					</form>
 				</div><br>	
 		   <%
         	 
-         }}%>
+         }%>
     </td></tr>
-    
+    <%} %>
     </tbody>
     
     </table>
+    <%if(answer_quesContent.getIf_complete()==1){ %>
     <submit_location>
-    <button type="button" class="btn btn-default pull-center" id="save" value="暂存">暂存</button>
-     <button type="button" class="btn btn-default pull-center" id="preview" value="预览">预览</button>
-    <button type="button" class="btn btn-default pull-center" id="submit-answer" value="提交">提交</button>
+    	<a HREF="#" class="btn btn-default pull-center"  value="返回">返回</a>
     </submit_location>
+    <% } 
+    else{%>
+    
+    
+     <span class="edit"><button type="button" class="btn btn-default pull-center" id="edit" value="编辑">编辑</button>
+     	
+     </span>
+    <span class="saveandpreview" hidden><button  type="button" class="btn btn-default pull-center" id="save" value="暂存" >暂存</button>
+     <button type="button" class="btn btn-default pull-center" id="preview" value="预览">预览</button></span>
+	<button type="button" class="btn btn-default pull-center" id="submit-answer" value="提交">提交</button>    
+
    	
     </div>       
- 	
+ 	<%} %>
 
   <div id="mcont0" class="bb">
 	   <ul class="block" style="display: none">222222222</ul>
@@ -242,16 +270,15 @@ font-size:13px;
 	   <ul class="block" style="display: none">4444444444</ul>
   </div> 
   
+	
   	<%
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String date=df.format(new Date());
-		session.setAttribute("quesContent", quesContent);
-	%>
-  
+  	%>
   	<p hidden>
 		<input type="text" name="quesnum" value="<%=quesContent.getQuestions().size()%>">
 		<input type="text" name="date" value="<%=date %>">
-		<input type="text" name="userid" value="<%=user.getId()%>">
+		<input type="text" name="userid" value="<%//=user.getId()%>">
 		<input type="text" name="questionnaireid" value="<%=quesContent.getId() %>">
 	</p>
   </body> 
