@@ -12,6 +12,8 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/dataTables.bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	
+	<script src="../js/saveAnswers.js"></script>
   
   
   <script type="text/javascript">
@@ -66,6 +68,10 @@ div{
 display:inline
 }
 
+submit_location{
+position:relative;
+left:700px
+}
 
 .logo_img{
 position:absolute;
@@ -89,7 +95,7 @@ font-size:13px;
   
 	<% 
 		questionnaire quesContent=(questionnaire)request.getAttribute("quesContent"); 
-		//user user=(user)session.getAttribute("user");
+		user user=(user)session.getAttribute("user");
 	%>
 
 	   <body>
@@ -100,7 +106,7 @@ font-size:13px;
      	 	 <a href = "#"><font  >问卷模板</font></a> &nbsp 
      		 <a href = "#"><font  >问卷广场</font></a> &nbsp 
     	     <a href = "#"><font  >个人中心 </font></a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-             <font size="3"  ><i class="fa fa-user fa-lg"><//%=user%></i></font>
+             <font size="3"  ><i class="fa fa-user fa-lg"><%=user%></i></font>
    </div>   
  <!-- 头部结束 -->
  
@@ -109,25 +115,7 @@ font-size:13px;
 <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>   <!-- 分割线 -->						
   
 	 
-	   <div class="boxa"> 
-<div class="boxa-l">
- <div id="sideBar">
-		<div id="sideBarMain">
- <div class="aa">
-	   <ul  id="leftmenu0">
-		 <img src="../picture/questionnaire.png" width="100px" height="140px" />
-		<div> 问卷缩略图</div>
-	   </ul>
-	   </div>
-</div><!--end: sideBarMain -->
-	</div><!--end: sideBar 侧边栏容器 -->
-	  <table width="1" border="0" cellspacing="0" cellpadding="0" height="800">
-  <tr>
-    <td width="1" bgcolor="#666666"></td>
-  </tr>
-  
-</table> 
-</div> 
+ 
 <div class="boxb">
  <table border=1 width=800px align="center" hight=20px >
    <tbody>
@@ -145,7 +133,7 @@ font-size:13px;
             <tr>
   <td><br>
       		 
-      	   <div class="box1" align="left"><font size="4" ><%=quesContent.getInstruction() %> </font> </div>
+      	   <div class="box1" align="left"><font size="4" >&nbsp&nbsp &nbsp&nbsp <%=quesContent.getInstruction() %> </font> </div>
       	 <br><br><br><br>
 			
 			 <br>
@@ -155,8 +143,8 @@ font-size:13px;
   
    <td><br>
       		 
-      	   <div class="box1" align="left"><font size="3" >发布时间:<%=quesContent.getSet_time() %><br>
-														   截止时间:<%=quesContent.getEnd_time() %><br></font> </div>
+      	   <div class="box1" align="left"><font size="3" >&nbsp&nbsp &nbsp&nbsp 发布时间:<%=quesContent.getSet_date() %><br>
+														   &nbsp&nbsp &nbsp&nbsp 截止时间:<%=quesContent.getEnd_date() %><br></font> </div>
       	 <br><br><br><br>
 			
 			 <br>
@@ -193,6 +181,9 @@ font-size:13px;
 		  		<form name="blankQ">
 		  		<input id="<%=question.getId() %>" name="<%=question.getTitle_num() %>" style="width:600px;height:100px;margin-left:100px; margin-top:20px" class="input-text"  type="text" colour="white" size="40"  height=30px/>
 			<br /><br />
+		  			<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
+		  			<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  			<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
 		  		</form>
 		  	</div><br>
 		 <% }          
@@ -200,6 +191,9 @@ font-size:13px;
         else if(question.getType()==1){ %>
 				<div class="mulChooseQuestion">
 					<form name="mulQ">
+						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
+						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
 						<%while(option_it.hasNext()){
 							 option=option_it.next();
 						%>
@@ -215,6 +209,9 @@ font-size:13px;
         	 %>
 				<div class="sinChooseQuestion">
 					<form name="sinQ">
+						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
+		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
+						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
 						<%while(option_it.hasNext()){ 
 							 option=option_it.next();
 						%>
@@ -230,6 +227,12 @@ font-size:13px;
     </tbody>
     
     </table>
+    <submit_location>
+    <button type="button" class="btn btn-default pull-center" id="save" value="暂存">暂存</button>
+     <button type="button" class="btn btn-default pull-center" id="preview" value="预览">预览</button>
+    <button type="button" class="btn btn-default pull-center" id="submit-answer" value="提交">提交</button>
+    </submit_location>
+   	
     </div>       
  	
 
@@ -239,5 +242,17 @@ font-size:13px;
 	   <ul class="block" style="display: none">4444444444</ul>
   </div> 
   
+  	<%
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String date=df.format(new Date());
+		session.setAttribute("quesContent", quesContent);
+	%>
+  
+  	<p hidden>
+		<input type="text" name="quesnum" value="<%=quesContent.getQuestions().size()%>">
+		<input type="text" name="date" value="<%=date %>">
+		<input type="text" name="userid" value="<%=user.getId()%>">
+		<input type="text" name="questionnaireid" value="<%=quesContent.getId() %>">
+	</p>
   </body> 
 </html>
