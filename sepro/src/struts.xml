@@ -13,12 +13,12 @@
 	
 	<!-- login -->
 	<action name="Login" class="action.LoginAction">
-		<result name="success">/jsp/publishQuestionnaire_cf.jsp</result>
+		<result name="success">/jsp/publishQuestionnaire.jsp</result>
 		<result name="none">/fail.jsp</result>
 	</action>
 	
 	<action name="Register" class="action.RegisterAction">
-		<result name="success">/succ.jsp</result>
+		<result name="success">/jsp/mainpage.jsp</result>
 		<result name="none">/fail.jsp</result>
 	</action>
 	
@@ -29,9 +29,8 @@
 	</action>
 	
 	<!-- 保存新创建的问卷内容(不包含更新问卷内容) -->
-	<action name="saveQuestionnaire" class="action.SaveQuesContentAction">
+	<action name="saveQuestionnaire" class="action.SaveQuesContentAction" method="save">
 		<interceptor-ref name="json"></interceptor-ref>
-		<result name="success">/succ.jsp</result>
 	</action>
 	
 	<!-- 保存或更新答案内容 -->
@@ -52,7 +51,7 @@
 	
 	<!-- publishQuestionnaire:跳转到“发布问卷”页面 -->
 	<action name="publishQuestionnaire" class="action.GetQuesListCreatedAction">
-		<result name="success">/jsp/publishQuestionnaire_cf.jsp</result>
+		<result name="success">/jsp/publishQuestionnaire.jsp</result>
 	</action>
 	
 	<!-- getQuesContent:获取问卷内容，跳转到查看问卷内容的页面 -->
@@ -62,7 +61,12 @@
 	
 	<!-- 填写问卷 -->
 	<action name="fillQuestionnaire" class="action.GetQuesContentAction">
-		<result name="success">/jsp/fillQuestionnaire.jsp</result>
+		<result name="success">/jsp/answerQuestionnaire.jsp</result>
+	</action>
+	
+	<!-- 修改回答 -->
+	<action name="editAnswer" class="action.GetAnsQuesContentAction">
+		<result name="success">/jsp/preview.jsp</result>
 	</action>
 	
 	<!-- questionnaireSquare：跳转到问卷广场 -->
@@ -74,6 +78,10 @@
 	<action name="publishQuesAction" class="action.PublishQuestionnaireAction" method="publish">
 	</action>
 	
+	
+	<action name="publishPreview" class="action.GetQuesContentAction">
+		<result name="success">/jsp/issue_preview.jsp</result>
+	</action>
 	
 	</package>
 </struts>

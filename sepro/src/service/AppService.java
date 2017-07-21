@@ -62,7 +62,7 @@ public interface AppService {
 	/**
 	 * int saveQuesContent(questionnaire ques);
 	 * 参数：questionnaire实例
-	 * 返回：保存状态（成功返回所创建的questionnaire实例id，失败返回-1）
+	 * 返回：创建的questionnaire实例id
 	 * 说明：参数是questionnaire实例，其中包含questions列表，每个questions包含options列
 	 *       表；其中questionnaire的id，one_question的id，q_id，以及q_options的q_id不需要
 	 *       指定。保存时分别存储到对应的table并且保证相互关联。用于保存问卷。

@@ -17,19 +17,32 @@ a { text-decoration:none;}
 .nav { border:2px solid #ccc;
  border-right:none; 
  overflow:hidden;
+ background:#eee;
   float:left;
   width:120px;
+   height:300px;
   font-family:"斜体";
   position:fixed;  
    }
 
-.nav ul li { float:left;}
+.nav ul li { float:left;
 
-.nav ul li a { width:120px; height:40px; text-align:top; line-height:40px; display:block; border-right:2px solid #ccc; background:#eee; color:#666;}
+}
+
+.nav ul li a { width:120px;
+ height:50px;
+  text-align:top; 
+  line-height:40px; 
+  display:block; 
+  border-right:2px solid #ccc; 
+  background:#eee; 
+  color:#666;}
 
 .nav ul li a:hover{ color:#f00; }
 
-.nav ul li ul { position:absolute; display:none;}
+.nav ul li ul { position:absolute; display:none;
+height:15px;
+}
 
 .nav ul li ul li { float:none;}
 
@@ -122,7 +135,7 @@ width:50%
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
   
-	   <body>
+	    <body>
 	   
 	   <div class="leader" align="center" >
 	<img src="../picture/logo.png" width="120px" height="45px" /></a>&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp 
@@ -148,7 +161,7 @@ width:50%
 	   <li><a  href="#begin"><font  size="5">标题</font> </a></li>
 	   <li><a  href="#det"><font  size="5">问卷简介</font></a></li>
 	   <li><a  href="#que"><font  size="5">编辑问卷</font> </a>
-	   		<ul>
+	   		<ul >
 
             <li><div>
 				<input type=button onclick=addNew1() value=单项选择 class=button_index>
@@ -185,92 +198,87 @@ width:50%
 
 
 <!-- table -->
-
- <table  border=1 align="center"  id=t136  width=800px>
+ <a id='begin' ></a>
+      	   <div class="box1" style="margin-left:20px">
+      	     <input  id="tit" value="【问卷标题】" class="input-text"  type="text" style="width:600px;height:60px;" size="50"/>
+      	   </div>
+      	   <br /> <br><br>
+      	   <a id='det' ></a>
+      	   <div class="box1" style="margin-left:20px">
+      	   <input id="wel" value="内容或欢迎语" class="input-text"  type="text" style="width:600px;height:60px; " size="50"/>
+      	    </div>
+      	 <br><br><br>
+ <table  border=1 style="margin-left:300px"  id=t136  width=600px>
    <tbody>
-	<tr>
-  		<td class="item7"colspan="2"><br>
-      		   <a id='begin' ></a>
-      	   <div class="box1" align="center">
-      	     <input  id="tit" value="【问卷标题】" class="input-text"  type="text" colour="white" size="50"/>;
-      	   </div><br>
-        </td>
-         
-    </tr>
+	
             
      <tr>
   		<td class="item7" colspan="2"><br>
-      		  <a id='det' ></a>
-      	   <div class="box1"  align="left">
-      	   <input id="wel" value="内容或欢迎语" class="input-text"  type="text" colour="white" size="50"/>;
-      	    </div>
-      	 <br><br><br><br><br>
+      		  
          </td>
       </tr>
            
       <tr>
-        <td class="item6" ><br>
-      		 <div class="que" align="left"heigh="8"><font size="4" >&nbsp&nbsp(1) &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp 
-      	    <input id="10" value="编辑题目" class="input-text"  type="text" colour="white" size="50"/></font> 
-      	    </div>
+        <td class="item6" id="-1"><br>
+      		 <div id="17" class="que" style="margin-left:20px "heigh="8">1</div>
+      	    <input id="10" style="margin-left:80px" value="编辑题目" class="input-text"  type="text"size="50"/> 
+      	    
       	     <br /><br />
-      	 	<div align="left"><font size="4" >&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp 1&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp  
-      	 	<input id="11" value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
+      	 	<div  style="margin-left:40px "> 1)
+      	 	<input id="11" style="margin-left:100px" value="编辑选项" class="input-text"  type="text"  size="44"/> </div>
             <br /><br />
-            <div align="left"><font size="4" >&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp 2&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp  
-        	<input  id="12"  value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
+            <div  style="margin-left:40px "> 2)
+        	<input  id="12"  style="margin-left:100px" value="编辑选项" class="input-text"  type="text" size="44"/></div>
 			<br>
-            <div class="options"  style="margin-left:65px;">
+  		
 			  <div id="0" ></div>
-			<i class="fa fa-plus-circle" aria-hidden="true">
+			<i class="fa fa-plus-circle" >
 			<button id="0" onclick="a(this.id)">新增选项</button></i>
-			</div>
+			<div id="18" title="1"></div>
             <br />
-            <label><input name="Fruit" type="checkbox" value="" /> &nbsp&nbsp &nbsp&nbsp必答 &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp</label>
+            <label><input id="19" name="Fruit" style="margin-left:40px" type="checkbox" value="" /> 必答</label>
+            </i>
 			 <br>
+			 <button id="-1"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button>
          </td>
         </tr>
             
        <tr>
-        <td class="item6" ><br>
-      		  <a id='que' ></a>
-      	      <div  align="left"heigh="8"><font size="4" > &nbsp&nbsp(2) &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp  
-      	      <input  id="20" value="编辑题目" class="input-text"  type="text" colour="white" size="50"/></font> </div>
-      		 <br /> <br />
-      	     <div align="left"><font size="4" >&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp 1&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp  
-      	     <input  id="21" value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
-             <br /><br />
-             <div align="left"><font size="4" >&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp 2&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp  
-             <input  id="22" value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
-		     <br>
-		     <div class="options"  style="margin-left:65px;">
-			  <div id="1"></div>
-			<i class="fa fa-plus-circle" aria-hidden="true">
-			  <button id="1" onclick="a(this.id)">新增选项</button></i>
-			</div>
-      		<br /><br />
-			&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp<label>
-            <input name="Fruit" type="checkbox" value="" /> &nbsp&nbsp &nbsp&nbsp必答 &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp</label>
-            <label><input align="right" name="Fruit" type="checkbox" value="" /> &nbsp&nbsp &nbsp&nbsp限制字数 </label> 
-            <input  value="最大字数" class="input-text"  type="text" colour="white" size="5"/></font> 
-			 <br>
+          <td class="item6" id="-2" ><br>
+      		 <div class="que" style="margin-left:20px "heigh="8">2  </div>
+      	    <input id="20" style="margin-left:80px" value="编辑题目" class="input-text"  type="text" colour="white" size="50"/></font> 
+      	   
+      	     <br /><br />
+      	 	<div  style="margin-left:40px "> 1)
+      	 	<input id="21" style="margin-left:100px" value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
+            <br /><br />
+            <div  style="margin-left:40px "> 2)
+        	<input  id="22"  style="margin-left:100px" value="编辑选项" class="input-text"  type="text" colour="white" size="44"/></font> </div>
+			<br>
 
+			  <div id="1"  style="margin-left:0px "></div>
+			<i class="fa fa-plus-circle" aria-hidden="true">
+			<button id="1" onclick="a(this.id)">新增选项</button></i>
+			<div id="28" title="2"></div>
+            <br />
+            <label><input id="29" name="Fruit" style="margin-left:40px" type="checkbox" value="" /> 必答</label>
+			 <br>
+			 <button id="-2"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button></i>
          </td>
         </tr>
             
     </tbody>
   </table>
-			<div style="margin-left:370px;">
-			  <input  value="编辑结束语"  style="width:600px;height:80px; " class="input-text"  type="text" colour="white" size="40"   height=30px/></font> 
-			
+			<div style="margin-left:300px;">
+			 
 			<a id='end' ></a>
-			   <button id="sub"type="submit" onclick="submit()">提交</button>
+			   <button id="sub"type="submit" onclick="submit()"  href="questionnaire.jsp">提交</button>
                 <button type="reset">重置</button>
                 </div>
                              <div class="end" align=right style="margin-left:370px;">
-			 <label><input name="choice" type="checkbox" value="" /> &nbsp&nbsp 完成后参与抽奖 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+			 <label><input name="choice" type="checkbox" value="" />  完成后参与抽奖 </label>
 			   </div>
-			   <%
+			  <%
 			   		user user= new user(); 
 			   		if(session.getAttribute("user")!=null){
 			   			user = (user)session.getAttribute("user");

@@ -1,5 +1,6 @@
 package action;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -81,8 +82,7 @@ public class SaveQuesContentAction extends BaseAction {
 		this.appService = appService;
 	}
 
-	@Override
-	public String execute() throws Exception{
+	public void save() throws Exception{
 		
 		JSONArray jsonQuesArray = new JSONArray(questions);
 		Set<one_question> javaQuesSet = new HashSet<one_question>();
@@ -124,8 +124,14 @@ public class SaveQuesContentAction extends BaseAction {
 			questionnaire.getQuestions().add(ques);
 		}
 		
-		appService.saveQuesContent(questionnaire);	
-		return SUCCESS;
+		int quesId = appService.saveQuesContent(questionnaire);
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("quesId", String.valueOf(quesId));
+		response().setContentType("text/html,charset=utf-8");
+		PrintWriter out = response().getWriter();
+		out.println(jsonObj.toString());
+		out.flush();
+		out.close();
 	}
 
 }

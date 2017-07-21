@@ -41,6 +41,7 @@ public class GetQuesListCreatedAction extends BaseAction {
 	
 	@Override
 	public String execute() throws Exception{
+		
 		quesListCreated = appService.getQuesListCreated(userId);
 		request().setAttribute("quesListCreated", quesListCreated);
 		return SUCCESS;

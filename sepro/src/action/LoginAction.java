@@ -19,6 +19,8 @@ public class LoginAction extends BaseAction {
 	private String identity;
 	
 	private String password;
+	
+	private List<questionnaire> quesListCreated;
 
 	
 	private AppService appService;
@@ -39,6 +41,14 @@ public class LoginAction extends BaseAction {
 		this.password = password;
 	}
 	
+	public List<questionnaire> getQuesListCreated() {
+		return quesListCreated;
+	}
+
+	public void setQuesListCreated(List<questionnaire> quesListCreated) {
+		this.quesListCreated = quesListCreated;
+	}
+
 	public AppService getAppService() {
 		return appService;
 	}
@@ -53,7 +63,7 @@ public class LoginAction extends BaseAction {
 		user user = appService.login(identity, password);
 		if((user) != null) {
 			session().setAttribute("user", user);
-			List<questionnaire> quesListCreated = appService.getQuesListCreated(user.getId());
+			quesListCreated = appService.getQuesListCreated(user.getId());
 			request().setAttribute("quesListCreated", quesListCreated);
 			return SUCCESS;
 		}

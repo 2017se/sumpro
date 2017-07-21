@@ -10,14 +10,18 @@
 
 <html>
 <head>
+	<%
+		String path = request.getContextPath();
+	%>
+
 	<link href="stylesheet" href="icono.min.css">
-	<link href="../css/personalCenter.css" rel="stylesheet">
-	<link href="../css/publishQuestionnaire.css" rel="stylesheet">
-	<link href="../css/questionnaireSquare.css" rel="stylesheet">
-	<link href="../css/font-awesome.min.css" rel="stylesheet">
+	<link href="<%=path %>/css/personalCenter.css" rel="stylesheet">
+	<link href="<%=path %>/css/publishQuestionnaire.css" rel="stylesheet">
+	<link href="<%=path %>/css/questionnaireSquare.css" rel="stylesheet">
+	<link href="<%=path %>/css/font-awesome.min.css" rel="stylesheet">
 	
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/personalCenter.js"></script>
+	<script src="<%=path %>/js/jquery.min.js"></script>
+	<script src="<%=path %>/js/personalCenter.js"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -41,7 +45,7 @@
 	<!-- 标题栏 -->
 	<div class="header">
 		<div class="header-logo">
-			<img src="../picture/logo.png" alt="logo">
+			<img src="<%=path %>/picture/logo.png" alt="logo">
 		</div>
 		<div class="header-menu">
 			<span class="header-menu-span">

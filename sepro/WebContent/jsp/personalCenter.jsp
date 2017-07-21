@@ -10,12 +10,16 @@
 
 <html>
 <head>
+
+	<%
+		String path = request.getContextPath();
+	%>
 	<link href="stylesheet" href="icono.min.css">
-	<link href="../css/personalCenter.css" rel="stylesheet">
-	<link href="../css/font-awesome.min.css" rel="stylesheet">
+	<link href="<%=path %>/css/personalCenter.css" rel="stylesheet">
+	<link href="<%=path %>/css/font-awesome.min.css" rel="stylesheet">
 	
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/personalCenter.js"></script>
+	<script src="<%=path %>/js/jquery.min.js"></script>
+	<script src="<%=path %>/js/personalCenter.js"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -43,7 +47,7 @@
 	<!-- 标题栏 -->
 	<div class="header">
 		<div class="header-logo">
-			<img src="../picture/logo.png" alt="logo">
+			<img src="<%=path %>/picture/logo.png" alt="logo">
 		</div>
 		<div class="header-menu">
 			<span class="header-menu-span">
@@ -100,7 +104,7 @@
 				</div>
 				<div class="area-body-img-container">
 					<div class="area-body-img-box">
-						<img class="area-body-img" src="../picture/user.jpg">
+						<img class="area-body-img" src="<%=path %>/picture/user.jpg">
 						<div class="area-body-img-button">[ 更换头像 ]</div>
 					</div>
 				</div>
@@ -126,6 +130,15 @@
 				<div class="questionnaire-box questionnaire-created" data-quesid="<%=ques.getId()%>">
 					<div class="questionnaire-title">
 						<%=ques.getTitle() %>
+					</div>
+					<div class="questionnaire-date">
+						<span>
+						<%if(ques.getSet_date() == null){%>
+							问卷状态：未发布
+						<%}else{ %>
+							问卷状态：已发布
+						<%} %>
+						</span>
 					</div>
 					<div class="questionnaire-date">
 						<span>创建日期：</span>
@@ -154,7 +167,8 @@
 				<span class="area-header-edit">[ 查看更多 ]</span>
 			</div>
 			<!-- 隐藏表单，用于向展示问卷内容页面的跳转 -->
-			<form action="fillQuestionnaire" method="post" id="fill-questionnaire">
+			<form action="editAnswer" method="post" id="fill-questionnaire">
+			<input name="userId" value="<%=user.getId() %>" style="display:none">
 			<input name="questionnaireId" value="" style="display:none">
 			<div class="area-body"><div style="min-height:320px;">
 				<%
@@ -166,6 +180,15 @@
 						data-userid="<%=ansQues.getU_id() %>" >
 					<div class="questionnaire-title">
 						<%=ques.getTitle() %>
+					</div>
+					<div class="questionnaire-date">
+						<span>
+						<%if(ansQues.getIf_complete() == 0){%>
+							回答状态：未提交
+						<%}else{ %>
+							回答状态：已提交
+						<%} %>
+						</span>
 					</div>
 					<div class="questionnaire-date">
 						<span>创建日期：</span>

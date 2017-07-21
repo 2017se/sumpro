@@ -8,7 +8,6 @@ public class GetQuesContentAction extends BaseAction {
 	private static final long serialVersionUID = 4351870503044426944L;
 	
 	private int questionnaireId;
-	
 	private questionnaire quesContent;
 	
 	private AppService appService;
@@ -20,14 +19,6 @@ public class GetQuesContentAction extends BaseAction {
 	public void setAppService(AppService appService) {
 		this.appService = appService;
 	}
-	
-	public questionnaire getQuesContent() {
-		return quesContent;
-	}
-
-	public void setQuesContent(questionnaire quesContent) {
-		this.quesContent = quesContent;
-	}
 
 	public int getQuestionnaireId() {
 		return questionnaireId;
@@ -37,6 +28,14 @@ public class GetQuesContentAction extends BaseAction {
 		this.questionnaireId = questionnaireId;
 	}
 	
+	public questionnaire getQuesContent() {
+		return quesContent;
+	}
+
+	public void setQuesContent(questionnaire quesContent) {
+		this.quesContent = quesContent;
+	}
+
 	@Override
 	public String execute() throws Exception{
 		quesContent = appService.getQuesContent(questionnaireId);

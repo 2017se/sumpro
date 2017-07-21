@@ -157,7 +157,7 @@ a {
 .questionnaire-title{
 	font-size:22px;
 	width:200px;
-	height:135px;
+	height:105px;
 	padding:20px 10px 20px 10px;
 }
 
@@ -169,5 +169,19 @@ a {
 	padding:5px 10px 5px 10px;
 }
 
+.submit-answer-button{
+	width:70px;
+	height:30px;
+	font-size:14px;
+	background-color:white;
+	color:grey;
+	border-radius:4px;
+	text-align:center;
+	border:1px solid #aaaaaa;
+	cursor:pointer;
+}
 
+.submit-answer-button:hover{
+	background-color:#eaeaea;
+}
 
