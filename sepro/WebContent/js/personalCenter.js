@@ -3,12 +3,14 @@ $(function(){
 	$(".user-info-edit").click(function(e){
 		
 		if(e.currentTarget.innerHTML == "[ 编辑 ]"){
+			/**
 			var obj_username = document.getElementById("user-info-username");
 			var username_input = document.createElement("input");
 			username_input.name = "username";
 			username_input.value = obj_username.innerHTML;
 			obj_username.innerHTML = "";
 			obj_username.appendChild(username_input);
+			**/
 		
 			var obj_mail = document.getElementById("user-info-mail");
 			var mail_input = document.createElement("input");

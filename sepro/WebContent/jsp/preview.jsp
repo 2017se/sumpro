@@ -117,7 +117,10 @@
       	   <div class="box1" align="left"><font size="3" >&nbsp&nbsp &nbsp&nbsp 发布时间:<%=quesContent.getSet_date() %><br>
 														   &nbsp&nbsp &nbsp&nbsp 截止时间:<%=quesContent.getEnd_date() %><br></font> </div>
       	 <br><br><br><br>
-			
+			<p hidden>
+				<input type="text" name="begindate" value="<%=quesContent.getSet_date()%>">
+				<input type="text" name="enddate" value="<%=quesContent.getEnd_date()%>">
+			</p>
 			 <br>
          </td>
             </tr>

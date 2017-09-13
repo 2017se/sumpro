@@ -67,6 +67,8 @@ public class LoginAction extends BaseAction {
 			request().setAttribute("quesListCreated", quesListCreated);
 			return SUCCESS;
 		}
+		request().setAttribute("action", "login");
+		request().setAttribute("message", "用户名或密码不正确");
 		return NONE;
 	}
 

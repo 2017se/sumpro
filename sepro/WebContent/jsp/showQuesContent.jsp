@@ -189,6 +189,11 @@
 <button_location>
    	<div class="return" > <button type="button" class="submit-answer-button" id="return" value="返回">返回</button></div>
 	<br>  
+	<div>
+		<a href="dataAnalysis.action?questionnaireId=<%=quesContent.getId() %>">
+			<button type="button" class="submit-answer-button" value="统计">统计</button>
+		</a>
+	</div>
  </button_location> 	
     </div>       
    	<p hidden>

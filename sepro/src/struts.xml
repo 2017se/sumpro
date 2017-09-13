@@ -14,18 +14,25 @@
 	<!-- login -->
 	<action name="Login" class="action.LoginAction">
 		<result name="success">/jsp/publishQuestionnaire.jsp</result>
-		<result name="none">/fail.jsp</result>
+		<result name="none">/jsp/fail.jsp</result>
 	</action>
 	
+	<!-- register,检查验证码 -->
 	<action name="Register" class="action.RegisterAction">
+		<result name="success">/jsp/verifyEmail.jsp</result>
+		<result name="none">/jsp/fail.jsp</result>
+	</action>
+	
+	<!-- 确认验证码后注册成功 -->
+	<action name="SaveUser" class="action.SaveUserAction">
 		<result name="success">/jsp/mainpage.jsp</result>
-		<result name="none">/fail.jsp</result>
+		<result name="none">/jsp/fail.jsp</result>
 	</action>
 	
 	<!-- 后端测试 -->
 	<action name="Test" class="action.TestAction">
-		<result name="success">/succ.jsp</result>
-		<result name="none">/fail.jsp</result>
+		<result name="success">/testJsp/succ.jsp</result>
+		<result name="none">/testJsp/fail.jsp</result>
 	</action>
 	
 	<!-- 保存新创建的问卷内容(不包含更新问卷内容) -->
@@ -34,9 +41,8 @@
 	</action>
 	
 	<!-- 保存或更新答案内容 -->
-	<action name="saveAnsQues" class="action.SaveAnsQuesContentAction">
+	<action name="saveAnsQues" class="action.SaveAnsQuesContentAction" method="save">
 		<interceptor-ref name="json"></interceptor-ref>
-		<result name="success">/succ.jsp</result>
 	</action>
 	
 	<!-- 跳转到“个人中心”页面 -->
@@ -46,7 +52,7 @@
 	
 	<!-- 更新个人信息，并跳转回“个人中心”页面 -->
 	<action name="updateUserInfo" class="action.UpdateUserInfoAction">
-		<result name="success" type="redirectAction">personalCenter</result>
+		<result name="success">/jsp/personalCenter.jsp</result>
 	</action>
 	
 	<!-- publishQuestionnaire:跳转到“发布问卷”页面 -->
@@ -81,6 +87,72 @@
 	
 	<action name="publishPreview" class="action.GetQuesContentAction">
 		<result name="success">/jsp/issue_preview.jsp</result>
+	</action>
+	
+	<!-- 下载Excel -->
+	<action name="downloadExcel" class="action.DownloadDataAction">
+		<result type="stream">
+			<!-- 文件对应的流对象 与action中流对象名称一致 -->
+			<param name="inputName">fileInputStream</param>
+			<!-- 发送给客户端的文件名${fileName} 保持与action中的文件名一致 -->
+			<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			<!-- 文件类型，application/octet-stream是不限制类型 -->
+			<param name="contentType">application/octet-stream</param>
+			<param name="bufferSize">1024</param>
+		</result>
+	</action>
+	
+	<!-- 显示统计图 -->
+	<action name="showDiagram" class="action.DownloadDiagramAction" method="getImg">
+		<result type="stream">
+			<param name="inputName">fileInputStream</param>
+		</result>
+	</action>
+	
+	<!-- 下载统计图 -->
+	<action name="downloadDiagram" class="action.DownloadDiagramAction" method="getImg">
+		<result type="stream">
+			<param name="inputName">fileInputStream</param>
+			<!-- 发送给客户端的文件名${fileName} 保持与action中的文件名一致 -->
+			<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			<!-- 文件类型，application/octet-stream是不限制类型 -->
+			<param name="contentType">application/octet-stream</param>
+			<param name="bufferSize">1024</param>
+		</result>
+	</action>
+	
+	<!-- 数据统计页面 -->
+	<action name="dataAnalysis" class="action.DataAnalysisAction">
+		<result name="success">/jsp/dataAnalysis.jsp</result>
+	</action>
+
+	<!-- 管理员 -->
+	<action name="adminRegis" class="action.AdminLoginAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="userAdmin" class="action.GetAllUsersAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="deleteUser" class="action.DeleteUserAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="forbid" class="action.ForbidUserAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="allow" class="action.AllowUserAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="assign" class="action.AssignAdminAction_n">
+		<result name="success">/jsp/useradmin_n.jsp</result>
+	</action>
+	<action name="quesAdmin" class="action.GetQuesListAction">
+		<result name="success">/jsp/quesadmin_n.jsp</result>
+	</action>
+	<action name="deleteQues" class="action.DeleteQuesAction_n">
+		<result name="success">/jsp/quesadmin_n.jsp</result>
+	</action>
+	<action name="showQuestionnaireAdmin" class="action.GetQuesContentAction">
+		<result name="success">/jsp/showQuesAdmin.jsp</result>
 	</action>
 	
 	</package>

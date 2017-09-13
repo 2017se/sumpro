@@ -136,18 +136,26 @@ width:50%
   </head>
   
 	    <body>
+	    	<%
+			   		user user= new user(); 
+			   		if(session.getAttribute("user")!=null){
+			   			user = (user)session.getAttribute("user");
+			   		}
+			%>
 	   
-	   <div class="leader" align="center" >
-	<img src="../picture/logo.png" width="120px" height="45px" /></a>&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp 
-         	 <a href="#"><font>发布问卷</font></a>&nbsp 
+		<div class="leader" align="center" >
+			<img src="../picture/logo.png" width="120px" height="45px" /></a>&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp 
+         	 <a href="publishQuestionnaire.action?userId=<%=user.getId()%>"><font>发布问卷</font></a>&nbsp 
      	 	 <a href = "#"><font  >问卷模板</font></a> &nbsp 
-     		 <a href = "#"><font  >问卷广场</font></a> &nbsp 
-    	     <a href = "#"><font  >个人中心 </font></a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-             <font size="3"  ><i class="fa fa-user fa-lg">username</font></i> 
-   </div>   
+     		 <a href = "questionnaireSquare.action"><font  >问卷广场</font></a> &nbsp 
+    	     <a href = "personalCenter.action"><font  >个人中心 </font></a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+            
+             <font size="3"  ><i class="fa fa-user fa-lg">userID：<div id="u_id"><%=user.getId() %></div></font></i> 
+ 	  </div>   
  <!-- 头部结束 -->
  <br /><br />
  
+
 
 <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#000000,direction:145,strength:15)" width="100%" color=#000000 SIZE=1>   <!-- 分割线 -->						
   
@@ -179,7 +187,7 @@ width:50%
 
         </ul>
 	   </li>
-	   <li> <a  href="#end"><font  size="5">结束语</font> </a></li>
+	   <li> <a  href="#end"><font  size="5">问卷末尾</font> </a></li>
 	   </ul>
 	   </div>
 </div><!--end: sideBarMain -->
@@ -200,12 +208,12 @@ width:50%
 <!-- table -->
  <a id='begin' ></a>
       	   <div class="box1" style="margin-left:20px">
-      	     <input  id="tit" value="【问卷标题】" class="input-text"  type="text" style="width:600px;height:60px;" size="50"/>
+      	     <input  id="tit" value="【问卷标题  30字以内】" maxlength="30"class="input-text"  type="text" style="width:600px;height:60px;" size="50"/>
       	   </div>
       	   <br /> <br><br>
       	   <a id='det' ></a>
       	   <div class="box1" style="margin-left:20px">
-      	   <input id="wel" value="内容或欢迎语" class="input-text"  type="text" style="width:600px;height:60px; " size="50"/>
+      	   <input id="wel" value="【内容或欢迎语 60字以内】" maxlength="60"class="input-text"  type="text" style="width:600px;height:60px; " size="50"/>
       	    </div>
       	 <br><br><br>
  <table  border=1 style="margin-left:300px"  id=t136  width=600px>
@@ -219,7 +227,7 @@ width:50%
       </tr>
            
       <tr>
-        <td class="item6" id="-1"><br>
+        <td class="item6" id="1000"><br>
       		 <div id="17" class="que" style="margin-left:20px "heigh="8">1</div>
       	    <input id="10" style="margin-left:80px" value="编辑题目" class="input-text"  type="text"size="50"/> 
       	    
@@ -234,17 +242,18 @@ width:50%
 			  <div id="0" ></div>
 			<i class="fa fa-plus-circle" >
 			<button id="0" onclick="a(this.id)">新增选项</button></i>
-			<div id="18" title="1"></div>
+			<lable id="17" style="margin-left:80px" value="0" class="input-text"  type="text" colour="white" size="0"/>
+			<div id="18" title="0"></div>
             <br />
             <label><input id="19" name="Fruit" style="margin-left:40px" type="checkbox" value="" /> 必答</label>
             </i>
 			 <br>
-			 <button id="-1"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button>
+			 <button id="1000"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button>
          </td>
         </tr>
             
        <tr>
-          <td class="item6" id="-2" ><br>
+          <td class="item6" id="1001" ><br>
       		 <div class="que" style="margin-left:20px "heigh="8">2  </div>
       	    <input id="20" style="margin-left:80px" value="编辑题目" class="input-text"  type="text" colour="white" size="50"/></font> 
       	   
@@ -259,38 +268,36 @@ width:50%
 			  <div id="1"  style="margin-left:0px "></div>
 			<i class="fa fa-plus-circle" aria-hidden="true">
 			<button id="1" onclick="a(this.id)">新增选项</button></i>
-			<div id="28" title="2"></div>
+			<br />
+			 <div>最大选择数：</div>
+			 </div><input id="27" style="margin-left:80px" value="2" class="input-text"  type="text" colour="white" size="2"/></font> 
+			<div id="28" title="1"></div>
             <br />
             <label><input id="29" name="Fruit" style="margin-left:40px" type="checkbox" value="" /> 必答</label>
 			 <br>
-			 <button id="-2"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button></i>
+			 <button id="1001"style="margin-right:100px; width:40px" onclick="clearRows(this.id)">删除</button></i>
          </td>
         </tr>
             
     </tbody>
   </table>
 			<div style="margin-left:300px;">
-			 
+			 <label for="meeting">开始日期：</label><input id="starttime" type="date" value="2017-09-13"/>
+			 <label for="meeting">结束日期：</label><input id="endtime" type="date" value="2017-10-13"/>
 			<a id='end' ></a>
-			   <button id="sub"type="submit" onclick="submit()"  href="questionnaire.jsp">提交</button>
-                <button type="reset">重置</button>
-                </div>
-                             <div class="end" align=right style="margin-left:370px;">
-			 <label><input name="choice" type="checkbox" value="" />  完成后参与抽奖 </label>
-			   </div>
-			  <%
-			   		user user= new user(); 
-			   		if(session.getAttribute("user")!=null){
-			   			user = (user)session.getAttribute("user");
-			   		}
-			   %>
-              <div id="u_id"><%=user.getId() %></div>
+			</div> 
+			<br>
+				<div style="margin-left:300px;">
+						  <button type="reset">重置</button>
+			   <button id="sub"type="submit" onclick="submit()"  href="questionnaire.jsp" style="align:right">提交</button>
+               
+</div>
 
 
 
 
          
-</div> 
+
  		
 
 	   </body>

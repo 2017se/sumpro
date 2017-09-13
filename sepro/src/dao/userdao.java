@@ -1,9 +1,12 @@
 /********************************************************************************* 
  * 6.29 创建
  * 6.30 增加接口定义  getUserByUsername,getUserByPhone,getUserByEmail
+ * 9.9  修改createuser使其返回id(int)
  *********************************************************************************/
 
 package dao;
+
+import java.util.List;
 
 import model.user;
 
@@ -18,8 +21,8 @@ public interface userdao {
 		//更改user信息
 		public boolean updateuser(user u);
 		
-		//创建一个user
-		public boolean createuser(user u);
+		//创建一个user,返回新User的id
+		public int createuser(user u);
 		
 		//通过用户名查找用户
 		public user getUserByUsername(String username);
@@ -29,5 +32,10 @@ public interface userdao {
 		
 		//通过邮箱账号查找用户
 		public user getUserByEmail(String email);
+		
+		//通过ip查找用户
+		public user getUserByIp(String ip);
+
+		public List<user> getAllUsers();
 		
 }

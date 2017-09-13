@@ -1,6 +1,7 @@
 /******************************************************************
  * 6.30 修改char->String, 拼写wassward->password
  *      修改name和mail的类型int->String
+ * 9.9  添加ip和authority，修改hibernate映射文件和数据库
  *****************************************************************/
 
 package model;
@@ -15,6 +16,8 @@ public class user {
 		private String qq;
 		private String phone;
 		private int role;
+		private String ip;
+		private int authority;
 		
 		public user(){
 			
@@ -82,6 +85,22 @@ public class user {
 		}
 		public void setRole(int role) {
 			this.role = role;
+		}
+
+		public String getIp() {
+			return ip;
+		}
+
+		public void setIp(String ip) {
+			this.ip = ip;
+		}
+
+		public int getAuthority() {
+			return authority;
+		}
+
+		public void setAuthority(int authority) {
+			this.authority = authority;
 		}
 		
 }

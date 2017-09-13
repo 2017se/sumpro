@@ -21,6 +21,13 @@ $(document).ready(function(){
 			}
 			else if(type==1){
 				var Qanswer="";
+				var maxlen=$("input[name='M"+j+"']").val();
+				var len=$("input[name='"+j+"']:checked").length;
+				if(maxlen<len){
+					alert("题目"+j+"超过最多选择个数");
+					return;
+				}				
+				
 				$("input[name='"+j+"']:checked").each(function(){
 					Qanswer=Qanswer+($(this).val());
 				});	
@@ -43,7 +50,8 @@ $(document).ready(function(){
 		jQuery.ajax({
 			url : 'saveAnsQues',
 			type : 'POST', //post
-			dataType : "json", //需要指定为json
+			dataType : "text", //需要指定为json
+			scriptCharset: 'utf-8',
 			data: {
 				u_id : userid, //变量名一致(userid)
 				q_id : questionnaireid, //变量名一致,questionnaire_id
@@ -52,9 +60,16 @@ $(document).ready(function(){
 				answers : JSON.stringify(array_answers) //变量名一致，用JSON.Stringify()封装且只封装一次
 			},
 			success : function(data){
+				
+				if(data.indexOf("error")>=0){
+					alert("请勿重复填写！");
+				}
+				else{
+					alert("提交成功！");
+				}
 			},
 			error : function(data){
-				alert("提交成功！");
+				alert("失败！");
 				history.back();
 			}
 		});
@@ -70,6 +85,13 @@ $(document).ready(function(){
 			}
 			else if(type==1){
 				var Qanswer="";
+				var maxlen=$("input[name='M"+j+"']").val();
+				var len=$("input[name='"+j+"']:checked").length;
+				if(maxlen<len){
+					alert("题目"+j+"超过最多选择个数");
+					return;
+				}
+
 				$("input[name='"+j+"']:checked").each(function(){
 					Qanswer=Qanswer+($(this).val());
 				});	
@@ -87,7 +109,8 @@ $(document).ready(function(){
 		jQuery.ajax({
 			url : 'saveAnsQues',
 			type : 'POST', //post
-			dataType : "json", //需要指定为json
+			dataType : "text", //需要指定为json
+			scriptCharset: 'utf-8',
 			data: {
 				u_id : userid, //变量名一致(userid)
 				q_id : questionnaireid, //变量名一致,questionnaire_id
@@ -96,9 +119,15 @@ $(document).ready(function(){
 				answers : JSON.stringify(array_answers) //变量名一致，用JSON.Stringify()封装且只封装一次
 			},
 			success : function(data){
+				if(data.indexOf("error")>=0){
+					alert("请勿重复填写！");
+				}
+				else{
+					alert("保存成功！");
+				}
 			},
 			error : function(data){
-				alert("保存成功！");
+				alert("失败！");
 				history.back();
 			}
 		});
@@ -108,7 +137,7 @@ $(document).ready(function(){
 	$("#preview").click(function(e){
 		$("input:radio").attr("disabled",true);
 		$("input:checkbox").attr("disabled",true);
-		$(".blankfill").attr("disabled",true);
+		$(".input-text").attr("disabled",true);
 		$(".edit").attr("hidden",false);
 		$(".save").attr("hidden","hidden");
 		$(".preview").attr("hidden","hidden");
@@ -117,7 +146,7 @@ $(document).ready(function(){
 	$("#edit").click(function(e){
 		$("input:radio").attr("disabled",false);
 		$("input:checkbox").attr("disabled",false);
-		$(".blankfill").attr("disabled",false);
+		$(".input-text").attr("disabled",false);
 		$(".edit").attr("hidden","hidden");
 		$(".save").attr("hidden",false);
 		$(".preview").attr("hidden",false);

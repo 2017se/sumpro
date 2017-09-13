@@ -69,4 +69,12 @@ public class answer_questionnairedaoimpl extends HibernateDaoSupport implements 
 		return false; //not exist
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<answer_questionnaire> getAnsQuesListByQuesId(int questionnaireId) {
+		List<answer_questionnaire> ansQuesList = (List<answer_questionnaire>)getHibernateTemplate()
+				.find("from answer_questionnaire as aq where aq.q_id=?", questionnaireId);
+		return ansQuesList;
+	}
+
 }

@@ -1,5 +1,6 @@
 /********************************************************************************* 
  * 6.30 修改hql语句中ANSWERS->answers[hql语法里面是POJO对象而不是table]
+ * 9.12 添加getAnsListByQuesId，用于导出单个问题的所有答案
  *********************************************************************************/
 
 package daoimpl;
@@ -47,5 +48,17 @@ public class answerdaoimpl extends HibernateDaoSupport implements answerdao {
 		// 没有检查是否update成功，直接返回true
 		getHibernateTemplate().merge(an);
 		return true;
+	}
+
+	/**
+	 * @param:one_question的id
+	 * @return:该问题的所有用户的回答记录
+	 * **/
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<answers> getAnsListByQuesId(int questionId) {
+		List<answers> ansList =(List<answers>) getHibernateTemplate()
+				.find("from answers as ans where ans.o_id=?", questionId);
+		return ansList;
 	}
 }

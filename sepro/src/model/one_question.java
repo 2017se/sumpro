@@ -4,6 +4,7 @@
  * 7.3  增加成员 List<q_options> Options, 表示一个question对应的所有
  *      选项
  * 7.4 修改List->Set，使用hibernate一对多映射
+ * 9.9 添加max_options，修改hibernate文件和数据库
  *****************************************************************/
 
 package model;
@@ -21,6 +22,7 @@ public class one_question {
 	private String stem;
 	private int type;
 	private int nessecity;
+	private Integer max_options;
 	
 	public int getId() {
 		return id;
@@ -62,6 +64,13 @@ public class one_question {
 	}
 	public void setNessecity(int nessecity) {
 		this.nessecity = nessecity;
+	}
+
+	public Integer getMax_options() {
+		return max_options;
+	}
+	public void setMax_options(Integer max_options) {
+		this.max_options = max_options;
 	}
 
 	

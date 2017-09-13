@@ -80,7 +80,11 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true" />
+			<tx:method name="get*" read-only="false" propagation="NOT_SUPPORTED"/>
+			<tx:method name="find*" read-only="false" propagation="NOT_SUPPORTED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
 			<tx:method name="*" />
 		</tx:attributes>
 	</tx:advice>

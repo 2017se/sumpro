@@ -1,5 +1,6 @@
 package action;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -68,8 +69,27 @@ public class SaveAnsQuesContentAction extends BaseAction {
 		this.appService = appService;
 	}
 
-	@Override
-	public String execute() throws Exception{
+	public void save() throws Exception{
+		//get user
+		if(u_id == 0){
+			//get ip
+			String ip;
+			if(request().getHeader("x-forwarded-for")==null){
+				ip = request().getRemoteAddr();
+			} else {
+				ip = request().getHeader("x-forwarded-for");
+			}
+			//check ip
+			if(appService.existIp(ip)){
+				response().setContentType("text/plain,charset=utf-8");
+				PrintWriter out = response().getWriter();
+				out.println("error");
+				out.flush();
+				out.close();
+				return;
+			}
+			u_id = appService.getUserTemp(ip).getId();
+		}
 		
 		answer_questionnaire ansQuesContent = new answer_questionnaire();
 		ansQuesContent.setQ_id(q_id);
@@ -84,13 +104,20 @@ public class SaveAnsQuesContentAction extends BaseAction {
 			jsonAnsObject = jsonAnsArray.optJSONObject(i);
 			javaAnsObject = new answers();
 			javaAnsObject.setO_id(jsonAnsObject.optInt("o_id"));
-			javaAnsObject.setU_id(jsonAnsObject.optInt("u_id"));
+			//javaAnsObject.setU_id(jsonAnsObject.optInt("u_id"));
+			javaAnsObject.setU_id(u_id);
 			javaAnsObject.setAnswer(jsonAnsObject.optString("answer"));
 			ansQuesContent.getAnsList().add(javaAnsObject);
 		}
 		
-		appService.saveAnsQuesContent(ansQuesContent);	
-		return SUCCESS;
+		appService.saveAnsQuesContent(ansQuesContent);
+		
+		//response to ajax
+		response().setContentType("text/plain,charset=utf-8");
+		PrintWriter out = response().getWriter();
+		out.println("success");
+		out.flush();
+		out.close();
 	}
 	
 }

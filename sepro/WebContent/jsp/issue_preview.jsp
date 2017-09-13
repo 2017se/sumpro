@@ -109,8 +109,9 @@
    <td><br>
       		 
       	   <div class="box1" align="left"><font size="3" >
-			&nbsp&nbsp &nbsp&nbsp 发布时间:<input type="text" name="issueTime"><br>
-			&nbsp&nbsp &nbsp&nbsp 截止时间:<input type="text" name="endTime"> <br></font> </div>									  
+			&nbsp&nbsp &nbsp&nbsp 发布时间:<%=quesContent.getSet_date() %>
+			&nbsp&nbsp &nbsp&nbsp 截止时间:<%=quesContent.getEnd_date() %>
+			</font> </div>									  
 														  
       	 <br><br><br><br>
 			

@@ -9,9 +9,9 @@
   <head>
 <style>
  	button_location{
- 	position:fixed;
- 	right:400px;
- 	top:150px
+ 	position:absolute;
+ 	right:100px;
+ 	top:100px;
  	}
  </style>
 
@@ -45,12 +45,13 @@
   
 	<% 
 		questionnaire quesContent=(questionnaire)request.getAttribute("quesContent"); 
-		user user=(user)session.getAttribute("user");
+		user user = (user)session.getAttribute("user");
+		if (user != null) {
 	%>
 
 	   <body>
 	   
-<div class="header">
+	<div class="header">
 		<div class="header-logo">
 			<img src="<%=path %>/picture/logo.png" alt="logo">
 		</div>
@@ -76,6 +77,15 @@
 	</div>
 	<!-- 标题栏position属性为fixed，这里需要同样大小的元素来占位 -->
 	<div class="header-placeholder"></div>
+	<%
+		}else{
+	%>
+	<!-- 没有标题栏设置成一半高度 -->
+	<div class="header-placeholder-half"></div>
+	<%
+		}
+	%>
+
  
  
 <br><br>					
@@ -136,8 +146,12 @@
        <div  align="left"style="margin-left:50px;"><%=question.getTitle_num()%>.
 		  	<%=question.getStem() %>
 		  	<% if(question.getNessecity()==1){%> 
-  				<span style="color:red">*</span><br>
-  			 <%}%>
+  				<span style="color:red">*</span>
+  			 <%}
+  			   if(question.getType()==1){%>
+  			   <span style="color:red">(最多选择<%=question.getMax_options() %>项)</span>
+  			 <%} %>
+  			 
        </div><br />
       	 <div align="left"><font size="4" ></font> </div><br />
          
@@ -154,11 +168,13 @@
 		 <% }          
          
         else if(question.getType()==1){ %>
+        
 				<div class="mulChooseQuestion">
 					<form name="mulQ">
 						<input hidden type="text" name="<%="N"+question.getTitle_num() %>" value="<%=question.getNessecity() %>">
 						<input hidden type="text" name="<%="I"+question.getTitle_num() %>" value="<%=question.getId() %>">
 		  				<input hidden type="text" name="<%="T"+question.getTitle_num() %>" value="<%=question.getType() %>">
+						<input hidden type="text" name="<%="M"+question.getTitle_num() %>" value="<%=question.getMax_options() %>">
 						<%while(option_it.hasNext()){
 							 option=option_it.next();
 						%>
@@ -195,8 +211,14 @@
    
 <button_location>
     <div class="edit" hidden><button type="button" class="submit-answer-button" id="edit" value="编辑">编辑</button> </div>
+    <%
+    	if (user != null){
+    %>
     <br>
     <div class="save" ><button  type="button" class="submit-answer-button" id="save" value="暂存" >暂存</button></div>
+    <%
+    	}
+    %>
    	<br>
    	<div class="preview" > <button type="button" class="submit-answer-button" id="preview" value="预览">预览</button></div>
 	<br>
@@ -214,8 +236,10 @@
   	<p hidden>
 		<input type="text" name="quesnum" value="<%=quesContent.getQuestions().size()%>">
 		<input type="text" name="date" value="<%=date %>">
-		<input type="text" name="userid" value="<%=user.getId()%>">
+		<input type="text" name="userid" value="<%=(user == null)? 0 : user.getId()%>">
 		<input type="text" name="questionnaireid" value="<%=quesContent.getId() %>">
 	</p>
+	<!-- 页面底端占位 -->
+	<div class="header-placeholder"></div>
   </body> 
 </html>

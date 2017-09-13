@@ -1,5 +1,6 @@
 /********************************************************************************
  * 7.6 创建answer_questionnairedao
+ * 9.12添加getAnsQuesListByQuesId
  ********************************************************************************/
 
 package dao;
@@ -26,4 +27,8 @@ public interface answer_questionnairedao {
 	//删除回答
 	public boolean deleteAnswer_questionnaire(int UserId, int questionnaireId);
 	
+	/**
+	 * 得到某一问卷的回答记录的列表，其中ansList空，questionnaire为空
+	 * **/
+	List<answer_questionnaire> getAnsQuesListByQuesId(int questionnaireId);
 }

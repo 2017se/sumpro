@@ -208,4 +208,63 @@ public interface AppService {
 	 * <p>说明：设置set_date和end_date即认为问卷已发布。用于发布问卷。
 	 * **/
 	public boolean publishQuestionnaire(int questionnaireId, Date set_date, Date end_date);
+	
+	/**
+	 * user getUserTemp(String ip);
+	 * <p>参数：(java.lang.String)ip,客户端ip
+	 * <p>返回：只含id和ip的User实例（作为临时用户）
+	 * <p>说明：用于区分未登录用户填写问卷的情况
+	 * **/
+	public user getUserTemp(String ip);
+	
+	/**
+	 * boolean existIp(String ip);
+	 *<p>参数：ip
+	 *<p>返回：存在返回true，不存在返回false
+	 * **/
+	public boolean existIp(String ip);
+	
+	/**
+	 * List<answer_questionnaire> getAnsQuesListByQuestionnaire(int questionnaireId);
+	 * <p>参数：questionnaire.id
+	 * <p>返回：某questionnaire对应的answer_questionnaire构成的List
+	 * <p>说明：List中，answer_questionnaire的questionnaire属性不需要填充，但ansList属性不为空。
+	 * 		<p>用于问卷统计。
+	 * **/
+	public List<answer_questionnaire> getAnsQuesListByQuestionnaire(int questionnaireId);
+	
+	/**
+	 * String getDataDiagram(int questionId);
+	 * <p>参数：问题one_question的id
+	 * <p>返回：生成diagram的路径（可以为固定路径）
+	 * <p>说明：生成一个问题（选择题）的回答分布统计图
+	 * **/
+	public String getDataDiagram(int questionId);
+	
+	/**
+	 * String getDataExcel(int questionnaireId);
+	 * <p>参数：需要导出结果的问卷的id
+	 * <p>返回：生成Excel文件的路径（可以固定路径）
+	 * <p>说明：生成该问卷所有问题答案的统计结果，调用getAnsListByQuestionnaire接口
+	 * **/
+	public String getDataExcel(int questionnaireId);
+	
+	//得到所有问卷（已发布+未发布+过期）
+	public List<questionnaire> getAllQuesList();
+
+
+	public List<user> getAllUsers();
+
+
+	public void allowUser(int id);
+
+
+	public void deleteUser(int id);
+
+
+	public void forbidUser(int id);
+
+
+	public void assignadmin(int id);
+	
 }

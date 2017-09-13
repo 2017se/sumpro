@@ -23,6 +23,9 @@
         <property name="nessecity" type="int">
             <column name="NESSECITY" />
         </property>
+        <property name="max_options" type="java.lang.Integer">
+            <column name="MAX_OPTIONS" />
+        </property>
         <set name="options" lazy="false" inverse="true" cascade="delete">
         	<key column="q_id" />
         	<one-to-many class="model.q_options"  not-found="ignore" />

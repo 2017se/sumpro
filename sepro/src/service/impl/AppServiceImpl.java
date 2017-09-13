@@ -7,8 +7,25 @@
 package service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import model.answer_questionnaire;
@@ -143,7 +160,7 @@ public class AppServiceImpl implements AppService {
 	/**
 	 * 注册
 	 * 参数是user,是action临时创建的user对象，包含username，phone，password
-	 * 用户名已存在返回-1，phone已存在返回-2，mail已存在返回-3
+	 * 用户名已存在返回-1，mail已存在返回-2，phone已存在返回-3，
 	 * 注册成功返回1
 	 * 
 	 * */
@@ -161,19 +178,20 @@ public class AppServiceImpl implements AppService {
 			return -1;
 		}
 		
-		//检查phone是否存在
-		oneUser = userdao.getUserByPhone(phoneTemp);
+		//检查mail是否存在
+		oneUser = userdao.getUserByEmail(mailTemp);
 		if(oneUser != null){ //exists
 			return -2;
 		}
-		
-		//检查mail是否存在
-		oneUser = userdao.getUserByEmail(mailTemp);
+			
+		//检查phone是否存在
+		oneUser = userdao.getUserByPhone(phoneTemp);
 		if(oneUser != null){ //exists
 			return -3;
 		}
 		
-		if(userdao.createuser(user)){
+
+		if(userdao.createuser(user) != 0){
 			return 1;
 		}
 		
@@ -366,16 +384,40 @@ public class AppServiceImpl implements AppService {
 	/**
 	 * int updateUserInfo(user user);
 	 * 参数：user实例
-	 * 返回：更新状态（成功返回0，失败返回-1）
+	 * 返回：更新状态（成功返回0，失败返回-1~-6）
 	 * 说明：更新用户信息，不需要重新创建。用于用户修改用户信息。
 	 * */
 	
 	@Override
 	public int updateUserInfo(user user) {
+		
+		int id = user.getId();
+		String usernameTemp = user.getUsername();
+		String phoneTemp = user.getPhone();
+		String mailTemp = user.getMail();
+		
+		//检查username是否存在
+		user oneUser = userdao.getUserByUsername(usernameTemp);
+		if(oneUser != null && oneUser.getId() != id){ //exists
+			return -1;
+		}
+		
+		//检查mail是否存在
+		oneUser = userdao.getUserByEmail(mailTemp);
+		if(oneUser != null && oneUser.getId() != id){ //exists
+			return -2;
+		}
+			
+		//检查phone是否存在
+		oneUser = userdao.getUserByPhone(phoneTemp);
+		if(oneUser != null && oneUser.getId() != id){ //exists
+			return -3;
+		}
+		
 		if(userdao.updateuser(user) == true){
 			return 0;
 		}
-		return -1;
+		return 0;
 	}
 
 	
@@ -560,6 +602,265 @@ public class AppServiceImpl implements AppService {
 			return true;
 		}
 		return false;
+	}
+
+
+	/**
+	 * user getUserTemp(String ip);
+	 * <p>参数：(java.lang.String)ip,客户端ip
+	 * <p>返回：只含id和ip的User实例（作为临时用户）
+	 * <p>说明：用于区分未登录用户填写问卷的情况
+	 * **/
+	
+	@Override
+	public user getUserTemp(String ip) {
+		user userTemp = new user();
+		userTemp.setIp(ip);
+		int userId = userdao.createuser(userTemp);
+		return userdao.get_one(userId);
+	}
+
+
+	/**
+	 * boolean existIp(String ip);
+	 *<p>参数：ip
+	 *<p>返回：存在返回true，不存在返回false
+	 * **/
+	
+	@Override
+	public boolean existIp(String ip) {
+		if(userdao.getUserByIp(ip)!= null){
+			return true;
+		}
+		return false;
+	}
+
+
+	/**
+	 * List<answer_questionnaire> getAnsQuesListByQuestionnaire(int questionnaireId);
+	 * 参数：questionnaire.id
+	 * 返回：某questionnaire对应的answer_questionnaire构成的List
+	 * 说明：List中，answer_questionnaire的questionnaire属性不需要填充，但ansList属性不为空。
+	 * 		<p>用于问卷统计。
+	 * */
+	
+	@Override
+	public List<answer_questionnaire> getAnsQuesListByQuestionnaire(int questionnaireId) {
+		List<answer_questionnaire>ansQuesList = answer_questionnairedao.getAnsQuesListByQuesId(questionnaireId);
+		questionnaire questionnaire = questionnairedao.getq(questionnaireId);
+		int userId, questionId;
+		answers ans;
+		//对回答记录列表中的每一条记录
+		for(answer_questionnaire ansQues : ansQuesList){
+			userId = ansQues.getU_id();
+			//对问卷中的每个问题
+			for(one_question question : questionnaire.getQuestions()){
+				questionId = question.getId();
+				ans = answerdao.getan(questionId, userId);
+				ansQues.getAnsList().add(ans);
+			}
+		}
+		return ansQuesList;
+	}
+
+
+	/**
+	 * String getDataDiagram(int questionId);
+	 * <p>参数：问题one_question的id
+	 * <p>返回：生成diagram的路径（可以为固定路径）
+	 * <p>说明：生成一个问题（选择题）的回答分布统计图
+	 * **/
+	
+	@Override
+	public String getDataDiagram(int questionId) {		
+		one_question question=one_questiondao.geto_q(questionId);
+		if(question.getType()==2)return null;//填空题直接跳过
+		String chartTitle=String.valueOf(question.getTitle_num())+"."+question.getStem();
+		JFreeChart chart;
+	
+		List<answers> anslist=new ArrayList<answers>();
+		anslist=answerdao.getAnsListByQuesId(questionId);//得到所有答案
+	
+		Map<String,Integer> ans_num=new HashMap<String,Integer>();
+		//使用一个map<题号，被选次数>保存所有答案信息
+		for(q_options option:question.getOptions()){
+			ans_num.put(option.getTitle(),0);
+		}//预先设置所有被选次数为0
+		int new_num;
+	
+		if(question.getType()==0){//单选题
+		
+			for(int i=0;i<anslist.size();i++){
+				new_num=ans_num.get(anslist.get(i).getAnswer())+1;
+				ans_num.put(anslist.get(i).getAnswer(),new_num);
+			}//重复更新被选次数
+			
+			DefaultPieDataset dpd=new DefaultPieDataset();//初始化饼图
+		
+		for(Map.Entry<String, Integer> entry:ans_num.entrySet()){//遍历map
+			for(q_options option:question.getOptions()){//每次map集合再遍历问题选项
+				if(entry.getKey()==option.getTitle()){//若选项题号==map中的题号
+					dpd.setValue(option.getProperty(), entry.getValue());//创建图例时使用题目内容
+				}
+			}
+		}
+		
+		chart=ChartFactory.createPieChart(chartTitle,dpd,true,false,false);
+	}	
+	else{//多选题	
+		
+		for(int i=0;i<anslist.size();i++){
+			for(int j=0;j<anslist.get(i).getAnswer().length();j++){
+				new_num=ans_num.get(String.valueOf(anslist.get(i).getAnswer().charAt(j)))+1;
+				ans_num.put(String.valueOf((anslist.get(i).getAnswer().charAt(j))), new_num);
+			}
+		}
+		
+		DefaultCategoryDataset dpd = new DefaultCategoryDataset();
+		
+		for(Map.Entry<String, Integer> entry:ans_num.entrySet()){//遍历map
+			dpd.setValue(entry.getValue(), "1", entry.getKey());
+		}
+		
+		chart=ChartFactory.createBarChart(chartTitle,"题号", "数量", dpd, PlotOrientation.VERTICAL, false,false,false);
+	}
+	FileOutputStream fos_jpg=null;
+	String path = "D:\\Web Cache\\diagram_" + questionId +".jpg";
+	try{
+		fos_jpg=new FileOutputStream(path);
+		ChartUtilities.writeChartAsJPEG(fos_jpg,0.7f,chart,640,480,null);
+		fos_jpg.close();
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+    	return path;
+	}
+
+	
+	/**
+	 * String getDataExcel(int questionnaireId);
+	 * <p>参数：需要导出结果的问卷的id
+	 * <p>返回：生成Excel文件的路径（可以固定路径）
+	 * <p>说明：生成该问卷所有问题答案的统计结果，调用getAnsListByQuestionnaire接口
+	 * **/
+	
+	@Override
+	public String getDataExcel(int questionnaireId) {
+		
+		questionnaire questionnaire = this.getQuesContent(questionnaireId);
+		Object[] quesArray = questionnaire.getQuestions().toArray();
+		List<answer_questionnaire> ansQuesList = this.getAnsQuesListByQuestionnaire(questionnaireId);
+		
+		// 第一步，创建一个webbook，对应一个Excel文件
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+		HSSFSheet sheet = wb.createSheet("回答统计");
+		
+		// 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+		HSSFRow row = sheet.createRow(0);
+		// 第四步，创建单元格，并设置值表头 设置表头居中
+		HSSFCellStyle style = wb.createCellStyle();
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		
+		//序号
+		HSSFCell cell = row.createCell(0);
+		cell.setCellValue("序号");
+		cell.setCellStyle(style);
+		
+		one_question question;
+		for(int j = 0; j < quesArray.length; j++){
+			question = (one_question)quesArray[j];
+			//题目（第一行）
+			int column = j + 1;//第二列开始
+			cell = row.createCell(column);
+			cell.setCellValue(question.getTitle_num() + ". " + question.getStem());
+			sheet.setColumnWidth(column, question.getStem().length()*600);
+		}
+		
+		//第五步，写入数据
+		answer_questionnaire ansQues;
+		for(int i = 0; i < ansQuesList.size(); i++){
+			ansQues = ansQuesList.get(i);
+			int rownum = i + 1;//第二行开始
+			row = sheet.createRow(rownum);
+			//写入第一列（序号）
+			cell = row.createCell(0);
+			cell.setCellValue(rownum);
+			cell.setCellStyle(style);
+			
+			List<answers> ansList = ansQues.getAnsList();
+			for(int j = 0; j < quesArray.length; j++){
+				//查询答案值（需要question的id）
+				String ansValue = "";
+				for(answers ans : ansList){
+					if(ans.getO_id() == ((one_question)quesArray[j]).getId()){
+						ansValue = ans.getAnswer();
+					}
+				}
+				//写入答案
+				int column = j + 1;//第二列开始
+				cell = row.createCell(column);
+				cell.setCellValue(ansValue);
+			}
+		}
+		
+		//第六步，保存文件
+		String path = "D:\\Web Cache\\test.xls";
+		try{
+			FileOutputStream fStream = new FileOutputStream(path);
+			wb.write(fStream);
+			fStream.close();
+		} 
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return path;
+	}
+
+
+	@Override
+	public List<user> getAllUsers() {
+		return userdao.getAllUsers();
+	}
+
+
+	@Override
+	public void allowUser(int id) {
+		user u=userdao.get_one(id);
+		u.setAuthority(1);
+		userdao.updateuser(u);
+		
+	}
+
+
+	@Override
+	public void deleteUser(int id) {
+		userdao.deleteuser(id);
+		
+	}
+
+
+	@Override
+	public void forbidUser(int id) {
+		user u=userdao.get_one(id);
+		u.setAuthority(0);
+		userdao.updateuser(u);
+		
+	}
+
+
+	@Override
+	public void assignadmin(int id) {
+		user u=userdao.get_one(id);
+		u.setRole(1);
+		userdao.updateuser(u);
+		
+	}
+
+
+	@Override
+	public List<questionnaire> getAllQuesList() {
+		return questionnairedao.getQuesList();
 	}
 
 }

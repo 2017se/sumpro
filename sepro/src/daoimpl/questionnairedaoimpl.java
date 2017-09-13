@@ -76,4 +76,12 @@ public class questionnairedaoimpl extends HibernateDaoSupport implements questio
 		return quesList;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<questionnaire> getQuesList() {
+		List<questionnaire> quesList=(List<questionnaire>) getHibernateTemplate()
+				.find("from questionnaire");
+		return quesList;
+	}
+
 }

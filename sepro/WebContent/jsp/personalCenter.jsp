@@ -42,6 +42,7 @@
 		if(request.getAttribute("quesListFilled") != null){
 			quesListFilled = (List<answer_questionnaire>)request.getAttribute("quesListFilled");
 		}
+		String error = (String)request.getAttribute("error");
 	%>
 	
 	<!-- 标题栏 -->
@@ -78,6 +79,13 @@
 		<div class="area-container">
 			<div class="area-header">
 				<span class="area-header-title">个人信息</span>
+				<%
+					if(error!=null) {
+				%>
+				<span class="area-error-message">提示：<%=error%></span>
+				<%
+					}
+				%>
 				<span class="area-header-edit user-info-edit">[ 编辑 ]</span>
 			</div>
 			<form action="updateUserInfo" method="post" id="user-info-submit">
@@ -102,12 +110,16 @@
 					<span class="area-body-info-title">QQ：</span>
 					<span id="user-info-qq"><%=user.getQq() %></span>
 				</div>
+				
+				<!--
 				<div class="area-body-img-container">
 					<div class="area-body-img-box">
 						<img class="area-body-img" src="<%=path %>/picture/user.jpg">
 						<div class="area-body-img-button">[ 更换头像 ]</div>
 					</div>
 				</div>
+				-->
+				
 			</div>
 			</form>
 		</div>

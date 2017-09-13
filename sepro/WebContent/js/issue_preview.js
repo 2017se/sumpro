@@ -13,14 +13,14 @@ $(document).ready(function(){
 		var questionnaireid=$("input[name='questionnaireid']").val();
 		
 		
-		var begintime=$("input[name='issueTime']").val();
-		var endtime=$("input[name='endTime']").val();
+		var begintime=$("input[name='begindate']").val();
+		var endtime=$("input[name='enddate']").val();
 		
 		
-		if(date>begintime){
+		/*if(date+1>begintime){
 			alert("发布时间必须早于此刻");
 			return;
-		}
+		}*/
 		jQuery.ajax({
 			url:"publishQuesAction",
 			type:'POST',

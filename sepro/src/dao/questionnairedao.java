@@ -27,4 +27,7 @@ public interface questionnairedao {
 		
 		//得到所有已发布问卷
 		public List<questionnaire> getAllQuesList();
+		
+		//得到所有问卷
+		public List<questionnaire> getQuesList();
 }

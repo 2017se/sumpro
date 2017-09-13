@@ -29,5 +29,11 @@
         <property name="role" type="int">
             <column name="ROLE" />
         </property>
+        <property name="ip" type="java.lang.String">
+            <column name="IP" />
+        </property>
+        <property name="authority" type="int">
+            <column name="AUTHORITY" />
+        </property>
     </class>
 </hibernate-mapping>

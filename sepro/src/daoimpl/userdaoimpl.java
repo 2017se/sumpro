@@ -10,12 +10,14 @@
 	        }
  *      修改hql语句中USER->user[hql语法里面是POJO对象而不是table]
  *      fix：使用List.get(0)前先检验是否为null
+ * 9.9  修改createuser使其返回id(int)
  *********************************************************************************/
 
 package daoimpl;
 
 import java.util.List;
 
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import dao.userdao;
@@ -54,11 +56,19 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 		return false;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
-	public boolean createuser(user u) {
+	public int createuser(user u) {
 		// 不检查用户是否存在,由被调用函数检查
-		getHibernateTemplate().save(u);
-		return true;
+		HibernateTemplate template = getHibernateTemplate();
+		template.setFlushMode(template.FLUSH_EAGER);
+		try{
+			template.save(u);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		return u.getId();
 	}
 
 	@Override
@@ -92,6 +102,25 @@ public class userdaoimpl extends HibernateDaoSupport implements userdao {
 			return null;
 		}
 		return u.get(0);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public user getUserByIp(String ip) {
+		List<user> u=(List<user>) getHibernateTemplate()
+				.find("from user as u where u.ip=?",ip);
+		if(u.isEmpty()){
+			return null;
+		}
+		return u.get(0);
+	}
+
+	@Override
+	public List<user> getAllUsers() {
+		@SuppressWarnings("unchecked")
+		List<user> u=(List<user>) getHibernateTemplate()
+				.find("from user");
+		return u;
 	}
 
 }

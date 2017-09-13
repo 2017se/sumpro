@@ -23,6 +23,7 @@ public class SaveQuesContentAction extends BaseAction {
 	private Date set_date;
 	private Date end_date;
 	private String questions;
+	private Integer max_options;
 
 	private AppService appService;
 	
@@ -74,6 +75,14 @@ public class SaveQuesContentAction extends BaseAction {
 		this.questions = questions;
 	}
 
+	public Integer getMax_options() {
+		return max_options;
+	}
+
+	public void setMax_options(Integer max_options) {
+		this.max_options = max_options;
+	}
+
 	public AppService getAppService() {
 		return appService;
 	}
@@ -101,6 +110,7 @@ public class SaveQuesContentAction extends BaseAction {
 			javaQuesObject.setStem(jsonQuesObject.optString("stem"));
 			javaQuesObject.setType(jsonQuesObject.optInt("type"));
 			javaQuesObject.setNessecity(jsonQuesObject.optInt("nessecity"));
+			javaQuesObject.setMax_options(Integer.valueOf(jsonQuesObject.optInt("max_options")));
 			
 			JSONArray jsonOptionArray = jsonQuesObject.optJSONArray("options");
 			for(int j = 0; j < jsonOptionArray.length(); j++){
